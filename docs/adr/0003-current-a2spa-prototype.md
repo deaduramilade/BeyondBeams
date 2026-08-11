@@ -1,7 +1,9 @@
 # ADR-0003: Treat current A2SPA as a provisional prototype
 
-Date: 2026-08-11  
-Status: Provisional  
+Date: 2026-08-11
+
+Status: Provisional
+
 Decision owners: Project maintainers
 
 ## Context
