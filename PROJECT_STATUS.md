@@ -1,8 +1,11 @@
 # Project Status
 
-**Phase:** Pre-production prototype  
-**Overall status:** Development only; not approved for production or real personal data  
-**Last reviewed:** 2026-08-11  
+**Phase:** Pre-production prototype
+
+**Overall status:** Development only; not approved for production or real personal data
+
+**Last reviewed:** 2026-08-11
+
 **Integration branch:** `main`
 
 ## Completed
