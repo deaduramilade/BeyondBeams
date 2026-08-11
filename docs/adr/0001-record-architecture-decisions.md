@@ -1,7 +1,9 @@
 # ADR-0001: Record consequential architecture decisions
 
-Date: 2026-08-11  
-Status: Accepted  
+Date: 2026-08-11
+
+Status: Accepted
+
 Decision owners: Project maintainers
 
 ## Context
