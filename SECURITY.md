@@ -8,7 +8,7 @@ Only the latest `main` commit is supported during pre-production. Do not disclos
 
 - Store production secrets in an approved secret manager, never Git or client bundles.
 - Restrict and rotate API keys and `OWNER_PRIVATE_KEY`; audit retrieval.
-- Treat `EXPO_PUBLIC_*` as public and never place privileged credentials there.
+- Treat all browser configuration as public and never place privileged credentials in client bundles.
 - If exposure occurs, revoke first, preserve evidence, then coordinate history cleanup.
 
 ## Cryptographic status

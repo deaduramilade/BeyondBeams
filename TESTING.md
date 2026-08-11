@@ -18,7 +18,7 @@ There is no automated test framework or CI workflow. `npm test` exits with “no
 2. Replay tests backed by a future nonce store.
 3. API integration tests for authentication, malformed JSON, schemas, status codes, CORS, size limits, and error redaction.
 4. Contract tests for each action request and response.
-5. Mobile/dashboard tests for configuration and error handling.
+5. PWA/dashboard tests for accessibility, installability, localization, configuration, and error handling.
 6. Security tests for abuse, rate limits, dependency advisories, and secret leakage.
 7. Copilot solution validation after export changes.
 

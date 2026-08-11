@@ -2,7 +2,7 @@
 
 ## Scope and assets
 
-Scope includes HTTP and mobile clients, Express API, orchestrator, agents, A2SPA keys, API credentials, payloads, logs, source, Copilot export, and future deployment systems. Critical assets are private keys, authorization integrity, personal data, audit evidence, service availability, and sovereign data-location guarantees.
+Scope includes the browser/PWA client, Express API, orchestrator, agents, A2SPA keys, API credentials, payloads, logs, source, Copilot export, and future deployment systems. Critical assets are private keys, authorization integrity, personal data, audit evidence, service availability, and sovereign data-location guarantees.
 
 ## Actors and boundaries
 

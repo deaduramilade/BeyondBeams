@@ -1,5 +1,5 @@
 // src/a2spa-crypto/ComplianceAutomationAgent.js
-// NDPC Compliance Automation Agent – Automated DPIA
+// Jurisdiction-neutral Compliance Automation Agent – Automated impact assessment
 // ONLY executes after A2SPA verification
 
 const crypto = require('crypto');
@@ -75,10 +75,10 @@ class ComplianceAutomationAgent {
       throw new Error(`A2SPA BLOCKED: ${verification.reason} — DPIA denied.`);
     }
 
-    console.log('📊 Automated DPIA Generated (NDPA 2023 compliant)');
+    console.log('📊 Automated impact assessment generated (simulated)');
     console.log('   Project:', actionPayload.projectName);
     console.log('   Risk Level:', actionPayload.riskLevel);
-    console.log('   Automated Response: DPIA report ready + NDPC notification');
+    console.log('   Automated Response: draft assessment ready for accountable review');
 
     return {
       status: "dpia_generated",
@@ -86,7 +86,7 @@ class ComplianceAutomationAgent {
       a2spaVerified: true,
       dpiAId: "DPIA-" + Date.now(),
       timestamp: new Date().toISOString(),
-      complianceStatus: "NDPA_2023_PASS"
+      assessmentStatus: "REVIEW_REQUIRED"
     };
   }
 }

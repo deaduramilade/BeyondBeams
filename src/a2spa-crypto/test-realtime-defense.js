@@ -3,7 +3,7 @@ const defenseAgent = require('./RealTimeDefenseAgent');
 
 async function testDefense() {
   const breachData = { 
-    breachId: "NDPC-BREACH-001", 
+    breachId: "PUBLIC-BREACH-001",
     affectedRecords: 1247, 
     dataFlow: "government-portal" 
   };

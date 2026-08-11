@@ -1,5 +1,5 @@
 // src/a2spa-crypto/RealTimeDefenseAgent.js
-// First secure NDPC sub-agent: Real-Time Defense
+// Real-Time Defense agent
 // ONLY executes after successful A2SPA verification
 
 const crypto = require('crypto');
@@ -85,7 +85,7 @@ class RealTimeDefenseAgent {
 
     console.log('🚨 BREACH DETECTED (simulated)');
     console.log('   Payload:', actionPayload);
-    console.log('   Automated Response: Notify NDPC + Isolate affected data flow');
+    console.log('   Automated Response: notify accountable incident authority + isolate affected data flow');
 
     return {
       status: "breach_handled",

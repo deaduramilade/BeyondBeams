@@ -2,11 +2,11 @@
 
 ## Position
 
-Oblivion-AI is designed with Nigerian privacy and regulatory use cases in mind, but design intent is not compliance. No independent audit, certification, legal opinion, control test, production evidence, or NDPC approval is recorded in this repository. Labels returned by prototype agents such as `NDPA_2023_PASS` are simulated outputs, not legal determinations.
+Oblivion-AI is designed to support jurisdiction-specific public-sector controls, but design intent is not compliance. No independent audit, certification, legal opinion, control test, production evidence, or governmental approval is recorded in this repository. Prototype agent outputs are simulated and are not legal determinations.
 
 ## Framework workstream
 
-Before production, accountable personnel must map applicable NDPA 2023, NDPR, sector, records-management, cybersecurity, procurement, accessibility, and government hosting requirements to controls, owners, evidence, testing frequency, exceptions, and remediation dates.
+Before production, accountable personnel must map applicable privacy, human-rights, administrative, sector, records-management, cybersecurity, AI, procurement, accessibility, transparency, and government-hosting requirements to controls, owners, evidence, testing frequency, exceptions, and remediation dates. The mapping is a versioned local policy pack; no single global baseline overrides local law.
 
 ## Evidence expectations
 

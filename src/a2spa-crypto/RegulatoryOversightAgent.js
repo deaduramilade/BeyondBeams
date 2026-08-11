@@ -1,5 +1,5 @@
 // src/a2spa-crypto/RegulatoryOversightAgent.js
-// NDPC Regulatory Oversight Agent – Real-time compliance monitoring
+// Jurisdiction-neutral Regulatory Oversight Agent – compliance monitoring
 const crypto = require('crypto');
 
 if (!process.env.OWNER_PRIVATE_KEY) {
@@ -53,7 +53,7 @@ class RegulatoryOversightAgent {
 
     console.log('📋 Regulatory Oversight Executed');
     console.log('   Controller:', actionPayload.controller);
-    console.log('   Automated Response: Compliance audit logged + NDPC report ready');
+    console.log('   Automated Response: simulated audit result ready for accountable review');
 
     return {
       status: "oversight_completed",

@@ -1,10 +1,10 @@
 {
   "name": "oblivion-ai",
   "version": "1.0.0",
-  "description": "**Sovereign Enterprise-Grade Agentic AI for the Nigerian Government & NDPC**",
+  "description": "Sovereign AI authorization and accountability prototype for public-sector institutions worldwide",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --check server.js && node --check src/OblivionAI.js"
   },
   "keywords": [],
   "author": "",

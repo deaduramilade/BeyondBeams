@@ -1,5 +1,5 @@
 // src/a2spa-crypto/PredictiveAnalyticsAgent.js
-// NDPC Predictive Analytics Agent – Risk modeling for data flows
+// Jurisdiction-neutral Predictive Analytics Agent – Risk modeling for data flows
 // ONLY executes after A2SPA verification
 
 const crypto = require('crypto');
@@ -78,7 +78,7 @@ class PredictiveAnalyticsAgent {
     console.log('📊 Predictive Risk Model Executed');
     console.log('   Data Flow:', actionPayload.dataFlow);
     console.log('   Risk Score:', actionPayload.riskScore || 'Calculated: HIGH');
-    console.log('   Automated Response: Flag for NDPC review + mitigation recommendations');
+    console.log('   Automated Response: flag for accountable review + mitigation recommendations');
 
     return {
       status: "risk_model_completed",
