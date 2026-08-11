@@ -4,7 +4,7 @@ This file documents engineering expectations; it is not yet a complete end-user 
 
 ## Prototype behavior
 
-Clients submit operator-provided JSON to the API. The service processes it in memory and may print selected values to console. No database, analytics SDK, cookie system, or telemetry service is declared in the current Node/mobile manifests. Hosting platforms and Expo tooling may introduce separate processing that must be assessed.
+Clients submit operator-provided JSON to the API. The service processes it in memory and may print selected values to console. No database, analytics SDK, cookie system, or telemetry service is declared in the current manifest. Hosting and browser platforms may introduce separate processing that must be assessed.
 
 ## Production notice requirements
 
@@ -12,4 +12,4 @@ Identify the controller and contact, purposes and lawful bases, data categories 
 
 ## Engineering requirements
 
-Default to synthetic data; minimize fields; redact logs; provide purpose-bound schemas; avoid decisions with legal or similarly significant effects without governance; support access, correction, deletion, restriction, objection, and portability workflows where applicable; and test retention/deletion. Privacy leads must approve new processing before implementation.
+Default to synthetic data; minimize fields; redact logs; provide purpose-bound schemas; avoid decisions with legal or similarly significant effects without governance; support notice, access, correction, deletion, restriction, objection, portability, appeal, and human-remedy workflows where applicable; and test retention/deletion. Provide localized, accessible notices and non-digital alternatives. Privacy leads must approve new processing before implementation.

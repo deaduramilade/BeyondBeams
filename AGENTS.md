@@ -14,12 +14,12 @@ This file governs automated assistants working in this repository. Active human 
 - Domain actions are intended to pass an A2SPA signature check.
 - Credentials and private keys are runtime inputs and must never enter Git.
 - `Oblivion_1_0_0_2/` is an exported solution artifact; avoid mechanical rewrites.
-- Root and mobile lockfiles remain synchronized with manifests.
+- Lockfiles remain synchronized with manifests.
 - Changes reach `main` only through reviewed pull requests.
 
 ## Engineering rules
 
-- Follow existing CommonJS and React Native conventions.
+- Follow existing CommonJS and browser conventions.
 - Prefer shared security primitives over duplicated cryptography.
 - Validate external input; never add permissive authentication defaults.
 - Never log credentials, keys, sensitive payloads, or personal data.
@@ -32,4 +32,4 @@ Run syntax checks, JSON parsing, relevant tests, a secret scan, and `git diff --
 
 ## Security boundaries
 
-Never commit `.env`, PEM material, API keys, tokens, connection strings, personal paths, or production identifiers. `EXPO_PUBLIC_*` values are public. Do not weaken A2SPA, authentication, listener exposure, or CORS without threat review and an ADR.
+Never commit `.env`, PEM material, API keys, tokens, connection strings, personal paths, or production identifiers. Browser configuration is public. Do not weaken A2SPA, authentication, listener exposure, or CORS without threat review and an ADR.

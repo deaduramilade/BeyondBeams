@@ -4,9 +4,11 @@
 
 No production deployment target or automated pipeline is committed. The current server is suitable only for controlled development evaluation.
 
+The GitHub Student Developer Pack can support learning and development: Codespaces supplies metered development environments, and the listed Microsoft Azure offer may support a time-limited development deployment subject to the user's current eligibility and offer terms. Neither is selected as the production platform. GitHub Pages can host static PWA assets but cannot execute this Express API. Every government deployment must select regions, operators, keys, support access, contracts, exit plans, and cross-border safeguards through its own procurement and sovereignty review.
+
 ## Required architecture
 
-Deploy an immutable, pinned artifact behind TLS ingress and a web application firewall. Run as a non-root identity on a read-only filesystem, bind internally, restrict egress, inject secrets from a managed vault, centralize redacted logs, and expose separate health/readiness signals. Separate development, staging, and production accounts, credentials, networks, and data.
+Deploy the PWA and immutable, pinned API artifact behind TLS ingress and a web application firewall. Run the API as a non-root identity on a read-only filesystem, bind internally, restrict egress, inject secrets from a managed vault, centralize redacted logs, and expose separate health/readiness signals. Separate development, staging, and production accounts, credentials, networks, data, keys, policy packs, and audit stores. Support government-controlled, private-cloud, or approved public-cloud topology without changing receipt semantics.
 
 ## Promotion process
 

@@ -32,13 +32,11 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# JavaScript and Expo build output
+# JavaScript and web build output
 dist/
 build/
 out/
 web-build/
-.expo/
-.expo-shared/
 .parcel-cache/
 .cache/
 .turbo/
@@ -46,16 +44,8 @@ web-build/
 .nuxt/
 .vite/
 .metro-health-check*
-expo-env.d.ts
 *.tsbuildinfo
 coverage/
-
-# Native build products (Expo prebuild / React Native)
-**/ios/Pods/
-**/ios/build/
-**/android/.gradle/
-**/android/build/
-**/android/app/build/
 
 # Test and tool caches
 .nyc_output/

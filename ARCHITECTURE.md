@@ -2,11 +2,11 @@
 
 ## Overview
 
-Oblivion-AI is currently a single-process Node.js agent-routing prototype with browser and Expo clients plus a Copilot Studio export. It is not a production reference architecture.
+Oblivion-AI is currently a single-process Node.js agent-routing prototype with a responsive browser/PWA client and a Copilot Studio export. It is not a production reference architecture.
 
 | Component | Responsibility | Trust |
 |---|---|---|
-| Dashboard and mobile app | Submit actions | Untrusted clients |
+| Dashboard/PWA | Submit actions and display receipts | Untrusted client |
 | Express API | API-key check and HTTP translation | Security boundary |
 | `OblivionAI` | Prefix-based dispatch | Internal router |
 | Domain agents | Sign, verify, and simulate outcomes | Privileged process |
@@ -21,9 +21,9 @@ Oblivion-AI is currently a single-process Node.js agent-routing prototype with b
 4. The agent hashes `JSON.stringify(payload)`, creates an envelope with timestamp and UUID nonce, signs it, and immediately verifies it.
 5. A successful check returns a simulated domain result; failures become HTTP 403 responses.
 
-## A2SPA boundary
+## A2SPA and A2SPA-R boundary
 
-The implementation demonstrates signature mechanics, but does not yet prove independent caller authorization: the receiving process creates the signature after accepting a request. Nonces are not persisted or checked for reuse, and JSON serialization is not formally canonical. Runtime JavaScript agents duplicate cryptographic logic while `A2SPA.ts` is a separate reference implementation.
+The implementation demonstrates signature mechanics, but does not yet prove independent caller authorization: the receiving process creates the signature after accepting a request. A2SPA-R is the target envelope/receipt profile; it requires an external issuer, subject/workload identity, purpose, jurisdiction, policy version, nonce, provenance, human approval, revocation status, retention class, and selective-disclosure commitments. Nonces are not persisted or checked for reuse, and serialization is not formally canonical.
 
 ## State and integrations
 

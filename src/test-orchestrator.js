@@ -3,9 +3,9 @@ const oblivionAI = require('./OblivionAI');
 
 async function testOrchestrator() {
   const breachPayload = { 
-    breachId: "NDPC-BREACH-002", 
+    breachId: "PUBLIC-BREACH-002",
     affectedRecords: 3421, 
-    dataFlow: "ndpc-portal" 
+    dataFlow: "public-service-portal"
   };
 
   try {

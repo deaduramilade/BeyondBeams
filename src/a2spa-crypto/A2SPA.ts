@@ -1,7 +1,7 @@
 // src/a2spa-crypto/A2SPA.ts
 // Oblivion-AI A2SPA (Agent-to-Secure Payload Authorization) Module
 // "No signature, no execution." — Zero-Trust execution boundary
-// Compliant with NDPR/NDPA 2023 and Project Charter
+// Prototype only; not evidence of legal compliance or production readiness
 
 import * as crypto from 'crypto';
 

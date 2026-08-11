@@ -28,8 +28,8 @@
 - Never commit `.env` files, API keys, access tokens, private keys, passwords,
   connection strings, or other credentials.
 - Use `.env.example` for configuration documentation with placeholder values.
-- Treat all `EXPO_PUBLIC_*` values as public because Expo embeds them in client
-  builds. Do not put privileged secrets in mobile configuration.
+- Treat all browser configuration as public. Do not put privileged secrets in
+  client bundles.
 - If a secret is exposed, revoke or rotate it immediately; removing it from a
   later commit does not remove it from Git history.
 
@@ -65,6 +65,6 @@ privacy-relevant changes require qualified review. Do not merge with unresolved
 critical findings, failing required checks, undocumented secrets, or unapproved
 compliance claims.
 
-Read `AGENTS.md` for automated-assistant rules, `DEVELOPMENT.md` for local setup,
+Read `CHARTER.md` for product boundaries, `AGENTS.md` for automated-assistant rules, `DEVELOPMENT.md` for local setup,
 `TESTING.md` for validation expectations, and `SECURITY.md` for disclosure and
 production security requirements.

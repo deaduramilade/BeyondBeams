@@ -12,7 +12,7 @@ Initial prototype clients and server contained hardcoded API values. Public sour
 
 ## Decision
 
-Supply server API keys and A2SPA key material at runtime. Ignore local environment files, publish placeholders only, and treat Expo public configuration as non-secret.
+Supply server API keys and A2SPA key material at runtime. Ignore local environment files, publish placeholders only, and treat all browser-delivered configuration as public and non-secret.
 
 ## Consequences
 

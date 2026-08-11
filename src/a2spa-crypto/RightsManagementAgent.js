@@ -1,5 +1,5 @@
 // src/a2spa-crypto/RightsManagementAgent.js
-// NDPC Rights Management Agent – Data Subject Rights (RTBF, Portability, etc.)
+// Jurisdiction-neutral Rights Management Agent – requests, appeals, and remedies
 const crypto = require('crypto');
 
 if (!process.env.OWNER_PRIVATE_KEY) {

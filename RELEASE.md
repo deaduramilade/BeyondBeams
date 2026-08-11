@@ -2,7 +2,7 @@
 
 ## Versioning
 
-Adopt Semantic Versioning once a stable contract exists. Until then, use `0.x` prereleases; the current manifest version `1.0.0` does not constitute production-readiness evidence. Align root, mobile, Copilot solution, and release notes deliberately rather than assuming one shared lifecycle.
+Adopt Semantic Versioning once a stable contract exists. Until then, use `0.x` prereleases; the current manifest version `1.0.0` does not constitute production-readiness evidence. Align the root service, PWA, Copilot solution, and release notes deliberately rather than assuming one shared lifecycle.
 
 ## Release checklist
 

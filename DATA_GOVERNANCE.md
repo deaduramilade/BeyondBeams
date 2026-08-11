@@ -16,6 +16,8 @@ The prototype accepts arbitrary JSON payloads and logs selected fields; it has n
 - Define retention and deletion for application, logs, backups, audits, and support records.
 - Restrict role-based access and review it periodically.
 - Record cross-border locations, subprocessors, and transfer safeguards.
+- Support jurisdiction-pinned storage, encryption keys, models, telemetry, backups, and support access.
+- Maintain localized notices, policy packs, records schedules, and machine-readable provenance.
 - Implement verified rights-request intake, identity checks, fulfillment, exceptions, and evidence.
 - Complete DPIAs for high-risk processing before operation.
 
@@ -25,4 +27,4 @@ Use structured, redacted event identifiers rather than raw payloads or subject I
 
 ## Accountability
 
-The designated data controller and privacy lead approve processing purposes, retention, notices, and rights procedures. Engineering implements controls but does not independently declare legal compliance.
+The designated public authority, data controller, records owner, and privacy lead approve processing purposes, retention, notices, rights, appeal, and human-remedy procedures. Engineering implements controls but does not independently declare legal compliance.

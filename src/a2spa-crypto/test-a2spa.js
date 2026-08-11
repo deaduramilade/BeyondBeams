@@ -64,8 +64,8 @@ async function runTest() {
   console.log('🚀 Running FIXED A2SPA Zero-Trust Test...\n');
 
   const samplePayload = { 
-    ndpaAction: "compliance.dpia.generate", 
-    subjectId: "NG-123456789", 
+    requestedAction: "compliance.dpia.generate",
+    subjectId: "SYNTHETIC-123456789",
     dataSubject: "Test Citizen" 
   };
 

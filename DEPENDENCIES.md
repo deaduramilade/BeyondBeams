@@ -2,7 +2,7 @@
 
 ## Inventory
 
-The root service uses Express, CORS, and body-parser. The mobile app uses Expo, React, React Native, axios, and expo-status-bar. Exact transitive graphs are preserved in root and mobile `package-lock.json` files.
+The service uses Express, CORS, and body-parser. Its exact transitive dependency graph is preserved in the root `package-lock.json`. The PWA uses browser platform capabilities and has no separate package manifest.
 
 ## Policy
 
@@ -14,7 +14,7 @@ The root service uses Express, CORS, and body-parser. The mobile app uses Expo, 
 
 ## Vulnerabilities
 
-Run audit and repository security tooling for both package roots. Triage exploitability and exposure rather than suppressing blindly. Critical/high findings require remediation or documented, expiring risk acceptance before release. Rotate credentials if compromise may have executed package code.
+Run audit and repository security tooling for the package root. Triage exploitability and exposure rather than suppressing blindly. Critical/high findings require remediation or documented, expiring risk acceptance before release. Rotate credentials if compromise may have executed package code.
 
 ## Removal and review
 

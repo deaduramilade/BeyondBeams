@@ -1,8 +1,8 @@
 # Oblivion-AI
 
-Oblivion-AI is an early-stage sovereign agent orchestration prototype focused on Nigerian public-sector privacy, security, and regulatory workflows. It combines a Node.js API, browser dashboard, Expo mobile client, five domain agents, an experimental Agent-to-Secure Payload Authorization (A2SPA) mechanism, and an unmanaged Microsoft Copilot Studio solution export.
+Oblivion-AI is an early-stage sovereign AI authorization and accountability fabric for governments and public institutions worldwide. It combines a Node.js API, an installable responsive web dashboard, five domain-agent prototypes, and an experimental Agent-to-Secure Payload Authorization (A2SPA) mechanism. Its proposed differentiator is A2SPA-R: privacy-preserving, verifiable action envelopes and receipts for consequential AI-assisted actions.
 
-> **Maturity notice:** This repository is a prototype. It has not been independently audited, certified, or demonstrated to satisfy the Nigeria Data Protection Act 2023 (NDPA), the Nigeria Data Protection Regulation (NDPR), or production security requirements. See [Project Status](PROJECT_STATUS.md), [Security](SECURITY.md), and [Compliance](COMPLIANCE.md).
+> **Maturity notice:** This repository is a prototype. It is not independently audited, certified, or approved for production or real personal data. Each deploying jurisdiction must complete its own legal, procurement, privacy, accessibility, records, security, and sovereignty assessment. See [Project Status](PROJECT_STATUS.md), [Security](SECURITY.md), and [Compliance](COMPLIANCE.md).
 
 ## Repository map
 
@@ -12,17 +12,16 @@ Oblivion-AI is an early-stage sovereign agent orchestration prototype focused on
 | `src/OblivionAI.js` | Action-prefix router and central orchestrator |
 | `src/a2spa-crypto/` | Domain agents, A2SPA prototypes, key utility, and scripts |
 | `dashboard/` | Browser client |
-| `mobile/` | Expo/React Native client |
+| `dashboard/` | Responsive browser/PWA client |
 | `Oblivion_1_0_0_2/` | Unmanaged Copilot Studio solution export |
 | `docs/adr/` | Architecture decision records |
 
 ## Quick start
 
-Prerequisites are Node.js, npm, Git, and, for mobile development, the Expo toolchain supported by Expo SDK 54.
+Prerequisites are Node.js, npm, Git, and a modern browser. GitHub Codespaces may be used as a development environment; it is not application hosting. A production deployment must use an approved sovereign or jurisdictionally acceptable platform, such as a government-controlled Azure region where contractually appropriate.
 
 ```bash
-npm ci
-cd mobile && npm ci && cd ..
+ npm ci
 node src/a2spa-crypto/keygen.js
 node server.js
 ```

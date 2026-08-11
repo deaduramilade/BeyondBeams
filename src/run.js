@@ -23,7 +23,7 @@ if (!actionType) {
   console.log("Examples:");
   console.log('  node run.js "realtime.defense.breach.detect" \'{"breachId":"TEST-001","affectedRecords":500}\'');
   console.log('  node run.js "compliance.automation.dpia.generate" \'{"projectName":"Portal v2","riskLevel":"High"}\'');
-  console.log('  node run.js "predictive.analytics.risk.model" \'{"dataFlow":"NDPC Portal"}\'');
+  console.log('  node run.js "predictive.analytics.risk.model" \'{"dataFlow":"Public Service Portal"}\'');
   process.exit(0);
 }
 

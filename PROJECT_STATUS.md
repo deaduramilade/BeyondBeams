@@ -11,10 +11,12 @@
 ## Completed
 
 - Imported Copilot Studio unmanaged solution version 1.0.0.2.
-- Implemented Express endpoint, browser dashboard, Expo client, orchestrator, and five simulated domain agents.
+- Implemented Express endpoint, browser/PWA dashboard, orchestrator, and five simulated domain agents.
 - Implemented prototype EC signing/verification and development key generation.
 - Removed hardcoded API credentials and LAN address; introduced runtime configuration.
 - Established atomic Git history, feature-branch workflow, and initial documentation suite.
+- Removed the discontinued native client and its dependency tree.
+- Adopted a jurisdiction-neutral public-sector charter, private-source governance model, and A2SPA-R target profile.
 
 ## In progress
 
@@ -22,10 +24,12 @@
 |---|---|---|
 | Documentation baseline | In review | Documentation PR approved and merged |
 | Repository governance | Partial | GitHub branch protection and required checks enabled |
+| Global policy-pack model | Design only | One independently reviewed jurisdictional implementation validated |
+| A2SPA-R action receipts | Design only | Versioned schemas, verifier, nonce store, receipt ledger, and tests implemented |
 
 ## Immediate backlog
 
-- [ ] Replace placeholder `npm test` with a deterministic automated suite.
+- [ ] Replace syntax-only `npm test` with a deterministic automated suite.
 - [ ] Centralize duplicated A2SPA implementation and resolve JS/TS divergence.
 - [ ] Design external authorization issuance and persisted nonce consumption.
 - [ ] Add strict request/action schemas, payload limits, restricted CORS, rate limits, and safe errors.
@@ -33,6 +37,8 @@
 - [ ] Correct `.env.example` to represent required owner key variables safely.
 - [ ] Resolve licensing conflict between `LICENSE.md` and `package.json`.
 - [ ] Establish CI secret/dependency/code/Markdown scans and branch protection.
+- [ ] Implement the A2SPA-R envelope, receipt, selective-disclosure, revocation, and verifier contracts.
+- [ ] Add localization, WCAG-conformant accessibility testing, and low-bandwidth/non-digital service paths.
 
 ## Production blockers
 
