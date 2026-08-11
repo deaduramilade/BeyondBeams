@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oblivion-AI • Sovereign NDPC Dashboard</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #0f172a; color: #e2e8f0; padding: 20px; margin: 0; }
+    .header { text-align: center; margin-bottom: 30px; }
+    .card { background: #1e2937; border-radius: 12px; padding: 20px; margin: 15px 0; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.3); }
+    button { background: #3b82f6; color: white; border: none; padding: 14px 28px; border-radius: 8px; cursor: pointer; font-weight: 600; margin: 8px 4px; }
+    button:hover { background: #2563eb; }
+    pre { background: #0f172a; padding: 20px; border-radius: 8px; overflow: auto; font-size: 14px; line-height: 1.5; }
+    .status { color: #22c55e; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🚀 Oblivion-AI Sovereign Dashboard</h1>
+    <p>NDPR/NDPA 2023 • A2SPA Zero-Trust • Enterprise Ready</p>
+  </div>
+
+  <div class="card">
+    <h2>Real-Time Defense</h2>
+    <button onclick="runAction('realtime.defense.breach.detect', {breachId:'DASH-001',affectedRecords:1250,dataFlow:'ndpc-portal'})">Simulate Breach Detection</button>
+  </div>
+
+  <div class="card">
+    <h2>Compliance Automation</h2>
+    <button onclick="runAction('compliance.automation.dpia.generate', {projectName:'Portal v2',riskLevel:'High'})">Generate Automated DPIA</button>
+  </div>
+
+  <div class="card">
+    <h2>Predictive Analytics</h2>
+    <button onclick="runAction('predictive.analytics.risk.model', {dataFlow:'NDPC Portal'})">Run Risk Model</button>
+  </div>
+
+  <div class="card">
+    <h2>Regulatory Oversight</h2>
+    <button onclick="runAction('regulatory.oversight.perform', {controller:'NDPC'})">Perform Oversight Audit</button>
+  </div>
+
+  <div class="card">
+    <h2>Rights Management</h2>
+    <button onclick="runAction('rights.management.exercise', {rightType:'Right to be Forgotten',subjectId:'NG-123456789'})">Exercise Data Subject Right</button>
+  </div>
+
+  <pre id="output" style="margin-top: 30px;"></pre>
+
+  <script>
+    const API_URL = window.location.origin + '/execute';
+    async function runAction(actionType, payload) {
+      const output = document.getElementById('output');
+      output.textContent = `🔐 Executing ${actionType}...\n\n`;
+
+      const apiKey = window.prompt('Enter your API key for this request:');
+      if (!apiKey) {
+        output.textContent += 'Request cancelled: an API key is required.';
+        return;
+      }
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'x-api-key': apiKey
+          },
+          body: JSON.stringify({ actionType, payload })
+        });
+
+        const data = await res.json();
+        output.textContent += JSON.stringify(data, null, 2);
+      } catch (err) {
+        output.textContent += `ERROR: ${err.message}`;
+      }
+    }
+  </script>
+</body>
+</html>
