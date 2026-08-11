@@ -45,3 +45,26 @@ Use a Conventional Commit-style prefix where practical:
 
 Keep each commit focused and explain the purpose rather than merely listing
 the files changed.
+
+## Change requirements
+
+- Add or update tests for changed behavior. Explain any temporary test gap.
+- Update API, configuration, architecture, security, and operational documents
+  when their contracts or assumptions change.
+- Update `PROJECT_STATUS.md` for completed milestones, new risks, blockers, and
+  next actions; reserve `CHANGELOG.md` for user-visible release changes.
+- Add an ADR for consequential architecture, cryptography, identity, data,
+  vendor, persistence, or deployment decisions.
+- Use synthetic data in tests and examples.
+
+## Pull-request review
+
+A pull request should state purpose, behavior, risk, validation evidence,
+configuration or migration impact, and rollback considerations. Security- or
+privacy-relevant changes require qualified review. Do not merge with unresolved
+critical findings, failing required checks, undocumented secrets, or unapproved
+compliance claims.
+
+Read `AGENTS.md` for automated-assistant rules, `DEVELOPMENT.md` for local setup,
+`TESTING.md` for validation expectations, and `SECURITY.md` for disclosure and
+production security requirements.
