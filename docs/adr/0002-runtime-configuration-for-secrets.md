@@ -1,7 +1,9 @@
 # ADR-0002: Supply secrets through runtime configuration
 
-Date: 2026-08-11  
-Status: Accepted  
+Date: 2026-08-11
+
+Status: Accepted
+
 Decision owners: Project maintainers
 
 ## Context
