@@ -1,38 +1,48 @@
 # Oblivion-AI
 
-**Sovereign Enterprise-Grade Agentic AI for the Nigerian Government & NDPC**
+Oblivion-AI is an early-stage sovereign agent orchestration prototype focused on Nigerian public-sector privacy, security, and regulatory workflows. It combines a Node.js API, browser dashboard, Expo mobile client, five domain agents, an experimental Agent-to-Secure Payload Authorization (A2SPA) mechanism, and an unmanaged Microsoft Copilot Studio solution export.
 
-[![License: Private](https://img.shields.io/badge/License-Private-red.svg)](https://github.com/deaduramilade/Oblivion-AI)
-[![NDPA 2023 Compliant](https://img.shields.io/badge/Compliant-NDPR%2FNDPA%202023-blue.svg)](https://ndpc.gov.ng)
+> **Maturity notice:** This repository is a prototype. It has not been independently audited, certified, or demonstrated to satisfy the Nigeria Data Protection Act 2023 (NDPA), the Nigeria Data Protection Regulation (NDPR), or production security requirements. See [Project Status](PROJECT_STATUS.md), [Security](SECURITY.md), and [Compliance](COMPLIANCE.md).
 
-## Project Charter (Retained Forever – Refined 13 May 2026)
+## Repository map
 
-**Owner:** Samuel Okunribido (X: oceanfi, Lagos, Nigeria) & Ayuba Amadi  
-**Co-Developer Access:** Strictly limited to the owner and one designated partner (to be named by the owner). No other individuals or accounts may receive any form of access.
+| Path | Responsibility |
+|---|---|
+| `server.js` | Express API and static dashboard host |
+| `src/OblivionAI.js` | Action-prefix router and central orchestrator |
+| `src/a2spa-crypto/` | Domain agents, A2SPA prototypes, key utility, and scripts |
+| `dashboard/` | Browser client |
+| `mobile/` | Expo/React Native client |
+| `Oblivion_1_0_0_2/` | Unmanaged Copilot Studio solution export |
+| `docs/adr/` | Architecture decision records |
 
-**Objective:** Build Oblivion-AI as a sovereign, enterprise-grade, agentic AI system initially for the Nigerian Government and NDPC, then expand to public consumers. Delivers secure, NDPR/NDPA 2023-compliant capabilities in Real-Time Defense, Compliance Automation, Predictive Analytics, Regulatory Oversight, Governance & Consent, and Rights Management.
+## Quick start
 
-**Core Architectural Mandate:** Every agent action requires cryptographic A2SPA (Agent-to-Secure Payload Authorization) authorisation. “No signature, no execution.” Full Zero-Trust execution boundary.
+Prerequisites are Node.js, npm, Git, and, for mobile development, the Expo toolchain supported by Expo SDK 54.
 
-**Current Status:** Phase 10 complete – Fully production-ready. Exported from Microsoft Copilot Studio (unmanaged solution v1.0.0.2) and now in pro-code development.
+```bash
+npm ci
+cd mobile && npm ci && cd ..
+node src/a2spa-crypto/keygen.js
+node server.js
+```
 
-**Repository Structure**
-- `Oblivion_1_0_0_2/` – Complete Copilot Studio export (topics, agents, knowledge, flows)
-- `README.md` – This file (self-documenting charter)
-- Future folders: `/src` (pro-code), `/docs`, `/a2spa-crypto`, `/mobile`, `/web`
+Set `OWNER_PRIVATE_KEY`, `OWNER_PUBLIC_KEY`, and `API_KEYS` in the process environment before starting the service. See [Configuration](CONFIGURATION.md). The default URL is `http://127.0.0.1:3000`.
 
-**Security & Access**
-- Private repository – two-person access only
-- All code remains Nigeria data-sovereign
-- A2SPA cryptographic controls enforced at every layer
+## Action families
 
-**Next Steps (Owner only)**
-1. Open in VS Code + GitHub Copilot
-2. Begin pro-code enhancement (A2SPA cryptographic module first)
-3. Build web/mobile integration
-4. Enterprise licensing & public rollout
+| Prefix | Agent |
+|---|---|
+| `realtime.defense.` | Real-Time Defense |
+| `compliance.automation.` | Compliance Automation |
+| `predictive.analytics.` | Predictive Analytics |
+| `regulatory.oversight.` | Regulatory Oversight |
+| `rights.management.` | Rights Management |
 
-**Contact:** Owner Samuel Okunribido & Ayuba Amadi only. All communication must reference this charter.
+## Documentation
 
----
-*This repository and all contents are governed by the Oblivion-AI Project Charter retained forever.*
+Start with [Development](DEVELOPMENT.md), [Architecture](ARCHITECTURE.md), [Agents](AGENTS.md), and [Contributing](CONTRIBUTING.md). Operational and assurance documents are indexed in [Project Status](PROJECT_STATUS.md).
+
+## License and status
+
+No open-source license is currently granted. See [License](LICENSE.md). The maintainers must resolve the conflicting `ISC` package metadata before third-party use or distribution.
