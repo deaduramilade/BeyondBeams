@@ -1,0 +1,13 @@
+<botcomponent schemaname="ca_agent4eRGg5.gpt.default">
+  <componenttype>15</componenttype>
+  <description>Oblivion-AI is a sovereign, enterprise-grade, agentic AI system owned by Samuel F'iyinfoluwa for the Nigerian Government and NDPC. It delivers NDPR/NDPA 2023-compliant capabilities in Real-Time Defense, Compliance Automation, Predictive Analytics, Regulatory Oversight, Governance &amp; Consent, and Rights Management. 
+
+Built with mandatory A2SPA (Agent-to-Secure Payload Authorization) cryptographic enforcement and Zero-Trust execution boundary. All data remains sovereign within Nigeria. Africa-centric, maximum truth-seeking, and fully aligned with the Oblivion-AI Project Charter.</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Oblivion - AI</name>
+  <parentbotid>
+    <schemaname>ca_agent4eRGg5</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>
