@@ -1,0 +1,89 @@
+# Oblivion-AI repository ignore policy
+# Keep source code, exported solution assets, documentation, and dependency
+# lockfiles versioned. Ignore only local, generated, or sensitive material.
+
+# Dependencies
+node_modules/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+!.env.template
+!.env.sample
+/keys/
+*.pem
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.mobileprovision
+
+# Runtime output, logs, and local data
+*.log
+logs/
+*.pid
+*.pid.lock
+*.seed
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# JavaScript and Expo build output
+dist/
+build/
+out/
+web-build/
+.expo/
+.expo-shared/
+.parcel-cache/
+.cache/
+.turbo/
+.next/
+.nuxt/
+.vite/
+.metro-health-check*
+expo-env.d.ts
+*.tsbuildinfo
+coverage/
+
+# Native build products (Expo prebuild / React Native)
+**/ios/Pods/
+**/ios/build/
+**/android/.gradle/
+**/android/build/
+**/android/app/build/
+
+# Test and tool caches
+.nyc_output/
+.jest-cache/
+.eslintcache
+.stylelintcache
+.rpt2_cache/
+
+# Operating-system and editor files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+# Temporary and patch files
+*.tmp
+*.temp
+*.swp
+*.swo
+*.orig
+*.rej
+*~
