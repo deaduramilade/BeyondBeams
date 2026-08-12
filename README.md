@@ -41,7 +41,7 @@ Configure OIDC/JWKS identity, A2SPA-R issuer public keys, signed policy packs, i
 
 ## Documentation
 
-Start with [Development](DEVELOPMENT.md), [Architecture](ARCHITECTURE.md), [Policy Packs](POLICY_PACKS.md), [Accessibility and Service Inclusion](ACCESSIBILITY.md), [Consequential-Action Safeguards](CONSEQUENTIAL_ACTIONS.md), [Release Assurance](RELEASE_ASSURANCE.md), [Persistence](PERSISTENCE.md), and [Observability](OBSERVABILITY.md). Assurance and residual risks are in [Production Assurance](PRODUCTION_ASSURANCE.md), [Risk Register](RISK_REGISTER.md), and [Project Status](PROJECT_STATUS.md). No production approval is recorded.
+Start with [Development](DEVELOPMENT.md), [Architecture](ARCHITECTURE.md), [Policy Packs](POLICY_PACKS.md), [Accessibility and Service Inclusion](ACCESSIBILITY.md), [Consequential-Action Safeguards](CONSEQUENTIAL_ACTIONS.md), [Release Assurance](RELEASE_ASSURANCE.md), [Persistence](PERSISTENCE.md), and [Observability](OBSERVABILITY.md). Remaining work is divided into Production Ready and Move to Live phases in [Production Readiness and Live-Service Roadmap](PRODUCTION_ROADMAP.md). Assurance and residual risks are in [Production Assurance](PRODUCTION_ASSURANCE.md), [Risk Register](RISK_REGISTER.md), and [Project Status](PROJECT_STATUS.md). No production approval is recorded.
 
 ## License and status
 

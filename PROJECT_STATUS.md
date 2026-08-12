@@ -23,46 +23,32 @@
 - Added semantic localized PWA development controls, offline/manual-service boundary messaging, policy self-approval denial, and deterministic accessibility regression checks.
 - Added release evidence automation for packaged artifacts, retained SBOM/audit/checksum/metadata, and GitHub provenance attestations; institutional release approval and vulnerability disposition remain external gates.
 
-## In progress
+## Two-phase path to live service
 
-| Work | State | Exit condition |
-|---|---|---|
-| Documentation baseline | In review | Documentation PR approved and merged |
-| Repository governance | Partial | GitHub branch protection and required checks enabled |
-| Global policy-pack model | Synthetic implementation | One independently reviewed jurisdictional implementation validated |
-| A2SPA-R action receipts | Development implementation | Production KMS/HSM, immutable store, and independent review |
-| Persistence and resilience | Reference adapters | Regional services, backup/restore, measured RTO/RPO, load evidence |
-| Monitoring and operations | Reference metrics/runbooks | Central collection, approved SLOs, on-call, exercises |
-| Accessibility and service inclusion | Engineering baseline | Independent WCAG/assistive-technology evidence and approved institutional manual-service path |
-| Consequential-action safeguards | Policy baseline | Authorized conflict-free review, appeals/correction intake, overrides, fairness evaluation, and durable workflow state |
-| Release assurance | Repository automation | Protected environment, signed release approval, vulnerability dispositions, and production retention evidence |
+All remaining development and deployment work is structured in [Production Readiness and Live-Service Roadmap](PRODUCTION_ROADMAP.md).
 
-## Immediate backlog
+| Phase | Purpose | Current state | Exit status |
+|---|---|---|---|
+| Phase 1: Production Ready | Complete the product, governed workflows, production service adapters, security, responsive and accessible UX, resilience, operations, and release evidence | Not complete; prototype controls and reference adapters only | `PRODUCTION_READY_CANDIDATE` for synthetic staging evaluation; not authorized for real data |
+| Phase 2: Move to Live | Configure and independently assess one named institutional deployment, commission its infrastructure and service channels, exercise operations, accept residual risk, and authorize a controlled launch | Not started; institution and jurisdiction are unresolved | `LIVE` only for the exact approved artifact, configuration, institution, jurisdiction, purposes, and operating boundary |
 
-- [x] Replace syntax-only `npm test` with a deterministic automated suite and CI workflow.
-- [x] Centralize duplicated A2SPA implementation and remove JS/TS divergence.
-- [x] Design external authorization issuance and persisted nonce consumption.
-- [x] Add strict request/action schemas, payload limits, restricted CORS, rate limits, and safe errors.
-- [x] Add health/readiness, structured redacted events, and graceful shutdown.
-- [x] Correct `.env.example` to represent OIDC, authorization, policy, receipt, persistence, and metrics configuration safely.
-- [x] Resolve the package metadata conflict by marking the private package `UNLICENSED`.
-- [x] Establish CI dependency, syntax, JSON, and tracked-file credential scans.
-- [x] Implement A2SPA-R envelope, receipt, replay, audit, revocation metadata, and verifier contracts; selective disclosure remains open.
-- [x] Implement signed policy-pack verification and default-deny policy decisions.
-- [x] Add reference queue/idempotency and protected low-cardinality metrics.
-- [ ] Obtain independent WCAG/assistive-technology, browser/device, localization, low-bandwidth, and non-digital-service evidence for a named deployment.
-- [ ] Implement an institution-approved durable human-review, correction, appeal, conflict-assignment, override, and outcome-quality workflow.
+### Phase 1 summary
 
-## Production blockers
+- Replace token and authorization-JSON entry with normal sign-in, guided workflow forms, review/confirmation, and server-side authorization issuance.
+- Implement durable case management, role separation, conflict-free review, decisions, notices, corrections, appeals, remedies, overrides, notifications, administration, and outcome measures.
+- Integrate production identity, authorization, KMS/HSM, database, queue, immutable evidence, backup, monitoring, and release services with failure-safe contracts.
+- Complete security, privacy engineering, policy lifecycle, load, restore, incident, rollback, and release-candidate evidence.
+- Validate all workflows across mobile, tablet, desktop, and widescreen layouts, including portrait/landscape, zoom/reflow, keyboard, assistive technology, localization, low bandwidth, and interrupted sessions.
 
-- [ ] Approved architecture and threat model
-- [ ] Independent security assessment and remediation
-- [ ] Privacy impact assessment, processing inventory, and lawful-basis review
-- [ ] Production secret/key lifecycle and access controls
-- [ ] Production durable audit/replay/queue/object storage, backup, restoration, incident, and operations evidence
-- [ ] Independently validated jurisdictional policy pack and approved publication/rollback custody
-- [ ] Deployment platform, sovereignty evidence, SLOs, RTO/RPO, and accountable approvals
-- [ ] Complete the evidence-based production gate in [Production Assurance](PRODUCTION_ASSURANCE.md)
+### Phase 2 summary
+
+- Approve the named institution's legal, policy, service, rights/remedy, records, language, accessibility, support, and accountability requirements.
+- Commission sovereign production infrastructure and institution-specific identity, key, policy, data, notification, document, monitoring, and support integrations.
+- Complete independent security, privacy, legal, accessibility, browser/device, localization, fairness, records, and operational assessments; remediate and retest findings.
+- Prove the configured deployment on supported phones, tablets, desktops, and widescreen displays with real institutional content and complete user/operator journeys.
+- Exercise restoration, incident response, manual-service continuity, rollback, key compromise, policy suspension, shutdown, and decommissioning before explicit go-live approval and a bounded rollout.
+
+Passing Phase 1 does not imply Phase 2 approval. Missing or expired Phase 2 evidence keeps real users and real data disabled.
 
 ## Known risks
 
@@ -72,7 +58,7 @@ The production-assurance register records additional unresolved dependencies: no
 
 ## Next recommended action
 
-Select a pilot institution/jurisdiction and complete independent policy, security, privacy, accessibility, persistence, restore, operations, and rights/remedy validation. Every status update should cite a pull request or commit.
+Execute Phase 1 of [Production Readiness and Live-Service Roadmap](PRODUCTION_ROADMAP.md) while selecting a pilot institution and jurisdiction for Phase 2. Every status update should cite a pull request or commit and the applicable phase exit evidence.
 
 ## Update history
 
@@ -82,3 +68,4 @@ Select a pilot institution/jurisdiction and complete independent policy, securit
 | 2026-08-11 | Added production-assurance governance framework and open residual-risk register; status remains NOT_READY |
 | 2026-08-12 | Added signed policy authorization, reference queue/metrics adapters, and production architecture/runbook boundaries; status remains NOT_READY |
 | 2026-08-12 | Added accessibility/service-inclusion engineering baseline, policy self-approval denial, and release evidence automation; status remains NOT_READY |
+| 2026-08-12 | Structured all remaining work into Production Ready and Move to Live phases, including responsive acceptance across mobile, tablet, desktop, and widescreen; status remains NOT_READY |
