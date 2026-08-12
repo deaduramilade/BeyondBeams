@@ -29,12 +29,12 @@ All remaining development and deployment work is structured in [Production Readi
 
 | Phase | Purpose | Current state | Exit status |
 |---|---|---|---|
-| Phase 1: Production Ready | Complete the product, governed workflows, production service adapters, security, responsive and accessible UX, resilience, operations, and release evidence | Not complete; prototype controls and reference adapters only | `PRODUCTION_READY_CANDIDATE` for synthetic staging evaluation; not authorized for real data |
+| Phase 1: Production Ready | Complete the product, governed workflows, production service adapters, security, responsive and accessible UX, resilience, operations, and release evidence | Not complete; prototype controls and reference adapters only | `PRODUCTION_READY_CANDIDATE — synthetic/staging use only` |
 | Phase 2: Move to Live | Configure and independently assess one named institutional deployment, commission its infrastructure and service channels, exercise operations, accept residual risk, and authorize a controlled launch | Not started; institution and jurisdiction are unresolved | `LIVE` only for the exact approved artifact, configuration, institution, jurisdiction, purposes, and operating boundary |
 
 ### Phase 1 summary
 
-- Replace token and authorization-JSON entry with normal sign-in, guided workflow forms, review/confirmation, and server-side authorization issuance.
+- Replace token and authorization-envelope entry with normal sign-in and server-side authorization issuance. Use guided workflow forms by default, with an optional JSON payload textarea enabled only when the user explicitly selects the JSON input radio option; both paths require equivalent validation, review, policy, authorization, and audit controls.
 - Implement durable case management, role separation, conflict-free review, decisions, notices, corrections, appeals, remedies, overrides, notifications, administration, and outcome measures.
 - Integrate production identity, authorization, KMS/HSM, database, queue, immutable evidence, backup, monitoring, and release services with failure-safe contracts.
 - Complete security, privacy engineering, policy lifecycle, load, restore, incident, rollback, and release-candidate evidence.

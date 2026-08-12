@@ -18,6 +18,8 @@ Testing must name browser, version, operating system, device, assistive technolo
 
 Phase 1 engineering must cover representative viewport widths of 320, 375, 768, 1024, 1280, 1440, and 1920 CSS pixels. Mobile forms must remain usable with touch, screen readers, and the virtual keyboard; tablet journeys must work in portrait and landscape; desktop and widescreen layouts must constrain readable content while using additional space for useful queue/detail views. Navigation, forms, tables, dialogs, evidence, status, and recovery controls must not overlap, clip text, hide actions, or require horizontal page scrolling.
 
+Where optional JSON payload entry is provided, an accessible input-method radio group must select the guided form by default. The JSON textarea must remain hidden or disabled until the JSON option is selected, expose its enabled and error state to assistive technology, preserve a logical focus order, and provide labelled syntax and schema errors. Selecting the guided form again must disable JSON submission predictably. The control and its validation messages must reflow across mobile, tablet, desktop, widescreen, zoom, localization, touch, keyboard, and screen-reader use.
+
 Phase 2 repeats the complete assessment against the named institution's supported physical phones, tablets, desktop browsers, widescreen displays, languages, content, identity provider, and service workflows. It must include portrait/landscape rotation, 200% and 400% zoom/reflow, localization expansion, low bandwidth, interruption, and session-expiry recovery. Passing source-level responsive checks is not evidence that the configured live service is accessible or usable.
 
 ## Institutional service path
