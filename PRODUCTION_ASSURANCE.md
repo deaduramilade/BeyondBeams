@@ -16,6 +16,15 @@ The deployment boundary must be completed per institution and jurisdiction. At m
 
 The service is **NOT_READY** unless every applicable gate below has current evidence and named approval. A completed implementation, passing automated test, or healthy process does not satisfy the gate.
 
+## Two-phase interpretation
+
+The assurance work is divided into two gates in [Production Readiness and Live-Service Roadmap](PRODUCTION_ROADMAP.md):
+
+1. **Phase 1: Production Ready** establishes a production-capable release candidate. It covers the complete guided user and operator workflows, durable case and review state, production persistence and key interfaces, security and policy controls, responsive and accessible experience across mobile, tablet, desktop, and widescreen layouts, resilience, operations, and release evidence. Phase 1 remains synthetic or staging-only and does not authorize real personal data or consequential decisions.
+2. **Phase 2: Move to Live** applies that release candidate to one named institution and jurisdiction. It adds the approved legal and service scope, real deployment boundary, sovereign infrastructure, institution-specific identity and policy, independent assessments, accessible digital and non-digital service routes, measured operational acceptance, residual-risk acceptance, and explicit controlled go-live approval.
+
+Phase 1 completion is therefore a technical readiness decision, not a production-use approval. Any missing, expired, disputed, or failed Phase 2 gate keeps the deployment disabled.
+
 | Gate | Required evidence | Required accountable approval | Current repository state |
 |---|---|---|---|
 | Scope and threat model | Approved architecture, data-flow diagram, abuse cases, residual-risk review | Service owner and security authority | Outstanding; repository threat model is provisional |
