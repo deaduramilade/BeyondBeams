@@ -10,9 +10,10 @@ Oblivion-AI is an early-stage sovereign AI authorization and accountability fabr
 |---|---|
 | `server.js` | Express API and static dashboard host |
 | `src/OblivionAI.js` | Action-prefix router and central orchestrator |
-| `src/a2spa-crypto/` | Domain agents, A2SPA prototypes, key utility, and scripts |
-| `dashboard/` | Browser client |
-| `dashboard/` | Responsive browser/PWA client |
+| `src/a2spa-r/` | Canonical authorization envelopes, receipts, trust, and replay |
+| `src/policy/` | Signed policy-pack verification and authorization decisions |
+| `src/audit/`, `src/persistence/`, `src/operations/` | Development audit, queue, and metrics adapters |
+| `dashboard/` | Responsive browser/PWA client with localized accessible development controls |
 | `Oblivion_1_0_0_2/` | Unmanaged Copilot Studio solution export |
 | `docs/adr/` | Architecture decision records |
 
@@ -26,7 +27,7 @@ node src/a2spa-crypto/keygen.js
 node server.js
 ```
 
-Set `OWNER_PRIVATE_KEY`, `OWNER_PUBLIC_KEY`, and `API_KEYS` in the process environment before starting the service. See [Configuration](CONFIGURATION.md). The default URL is `http://127.0.0.1:3000`.
+Configure OIDC/JWKS identity, A2SPA-R issuer public keys, signed policy packs, ignored local replay/audit directories, and a development receipt signer before starting. See [Configuration](CONFIGURATION.md). The default URL is `http://127.0.0.1:3000`.
 
 ## Action families
 
@@ -40,8 +41,8 @@ Set `OWNER_PRIVATE_KEY`, `OWNER_PUBLIC_KEY`, and `API_KEYS` in the process envir
 
 ## Documentation
 
-Start with [Development](DEVELOPMENT.md), [Architecture](ARCHITECTURE.md), [Agents](AGENTS.md), and [Contributing](CONTRIBUTING.md). Operational and assurance documents are indexed in [Project Status](PROJECT_STATUS.md).
+Start with [Development](DEVELOPMENT.md), [Architecture](ARCHITECTURE.md), [Policy Packs](POLICY_PACKS.md), [Accessibility and Service Inclusion](ACCESSIBILITY.md), [Consequential-Action Safeguards](CONSEQUENTIAL_ACTIONS.md), [Release Assurance](RELEASE_ASSURANCE.md), [Persistence](PERSISTENCE.md), and [Observability](OBSERVABILITY.md). Assurance and residual risks are in [Production Assurance](PRODUCTION_ASSURANCE.md), [Risk Register](RISK_REGISTER.md), and [Project Status](PROJECT_STATUS.md). No production approval is recorded.
 
 ## License and status
 
-No open-source license is currently granted. See [License](LICENSE.md). The maintainers must resolve the conflicting `ISC` package metadata before third-party use or distribution.
+No open-source license is currently granted. See [License](LICENSE.md). The private package metadata is marked `UNLICENSED` to match that status.
