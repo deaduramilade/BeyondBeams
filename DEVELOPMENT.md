@@ -15,7 +15,7 @@ cd oblivionsec
 npm ci
 ```
 
-Copy `.env.example` to an ignored local file as a reference, but note that this project does not load `.env` automatically. Export values into the process environment or use an approved external launcher. Generate development-only keys with `node src/a2spa-crypto/keygen.js`, then convert PEM line breaks to escaped `\n` for single-line environment variables.
+Copy `.env.example` to an ignored local file as a reference; the project does not load it automatically. Export values through the shell or approved launcher. Generate development-only issuer/policy/receipt keys outside source control, publish only public verification keys, and escape PEM line breaks as `\n` for single-line environment variables.
 
 ## Run
 
@@ -24,7 +24,7 @@ node server.js
 node src/run.js "realtime.defense.breach.detect" "{\"breachId\":\"DEV-001\"}"
 ```
 
-The CLI and server import all agents and therefore require both owner key variables. The dashboard prompts for an API key and derives its endpoint from the current origin.
+The server requires OIDC/JWKS, A2SPA-R trust, a signed active policy, ignored local replay/audit paths, and a development receipt signer. The dashboard derives its endpoint from the current origin; obtain bearer identity and external authorization through an approved development issuer.
 
 ## Workflow
 
@@ -32,12 +32,12 @@ Create `feature/`, `fix/`, `docs/`, `test/`, `security/`, or `chore/` branches f
 
 ## Validation
 
-Run `node --check` for JavaScript, parse JSON, execute relevant scripts with disposable keys, run `npm audit`, scan for secrets, and run `git diff --check`. `npm test` currently fails by design because the manifest contains a placeholder; replacing it is a priority.
+Run `npm run check`, `npm test`, parse JSON, run `npm audit --audit-level=low`, scan for secrets, and run `git diff --check`. The automated suite uses ephemeral in-memory keys and synthetic data.
 
 ## Troubleshooting
 
-- Startup key error: export `OWNER_PRIVATE_KEY` and `OWNER_PUBLIC_KEY` with valid matching PEM values.
-- `API_KEYS` error: provide a non-empty JSON object such as `{"development-value":"developer"}`.
-- HTTP 401: send a configured key in `x-api-key`.
-- Dashboard access: use the same-origin server and a restricted development key.
-- Signature failure: confirm matching key pair and preserved PEM line breaks.
+- Startup error: validate required OIDC, A2SPA, policy, signer, digest, and absolute-directory configuration without printing values.
+- HTTP 401: verify bearer issuer, audience, JWKS, expiry, tenant/workload/principal claims, and scopes.
+- HTTP 403: inspect the sanitized A2SPA-R or policy reason and the corresponding audit decision.
+- Policy failure: verify publisher signature, exact active digest, effective/expiry time, binding, approvals, and revocation state.
+- Signature failure: confirm the correct public key, key ID, algorithm, validity, and preserved PEM line breaks.
