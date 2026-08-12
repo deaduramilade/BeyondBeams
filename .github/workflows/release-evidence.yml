@@ -1,0 +1,65 @@
+name: Release Evidence
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Reviewed annotated release tag
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  id-token: write
+  attestations: write
+
+jobs:
+  evidence:
+    runs-on: ubuntu-latest
+    environment: release
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ inputs.tag }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - name: Validate Release Tag Input
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: '[[ "$RELEASE_TAG" =~ ^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$ ]]'
+      - name: Create Release Evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p artifacts release-evidence
+          npm audit --audit-level=low --json > release-evidence/npm-audit.json
+          npm sbom --sbom-format cyclonedx > release-evidence/sbom.cdx.json
+          npm pack --pack-destination artifacts
+          sha256sum artifacts/* release-evidence/sbom.cdx.json release-evidence/npm-audit.json > release-evidence/SHA256SUMS
+          node -e "const fs=require('fs');fs.writeFileSync('release-evidence/build-metadata.json',JSON.stringify({schema:'oblivion.release-evidence/1',repository:process.env.GITHUB_REPOSITORY,commit:process.env.GITHUB_SHA,ref:process.env.GITHUB_REF,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,actor:process.env.GITHUB_ACTOR,node:process.version,createdAt:new Date().toISOString()},null,2)+'\n')"
+      - name: Verify Release Tag
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: test "$(git rev-parse HEAD)" = "$(git rev-list -n 1 "$RELEASE_TAG")"
+      - name: Attest Release Artifact Provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: artifacts/*.tgz
+      - name: Publish Release with Evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "${{ inputs.tag }}" artifacts/* release-evidence/* --verify-tag --generate-notes --title "${{ inputs.tag }}"
+      - name: Retain Workflow Evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-evidence-${{ github.sha }}
+          path: |
+            artifacts/
+            release-evidence/
+          if-no-files-found: error
+          retention-days: 90
