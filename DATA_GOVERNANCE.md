@@ -6,7 +6,7 @@ Process personal data lawfully, fairly, transparently, purpose-specifically, min
 
 ## Current data behavior
 
-The prototype accepts arbitrary JSON payloads and logs selected fields; it has no durable application store. Example payloads include subject identifiers, breach metadata, controller names, and project details. Console logging can still expose sensitive content. No retention or deletion automation exists.
+The prototype accepts strictly validated action payloads, processes them in memory, and stores digests/opaque identifiers in local replay/audit/queue files. Example payloads may contain subject identifiers, breach metadata, controller names, and project details. Policy decisions bind purpose, institution, jurisdiction, retention class, and rights metadata. Physical deletion and production backup retention remain external approval gates.
 
 ## Required controls
 
