@@ -2,7 +2,7 @@
 
 ## Current limitation
 
-The prototype has no persistent application database or formal backup system. Source is in GitHub; keys and future audit/data stores must never be assumed recoverable from Git. No RTO or RPO has been approved.
+The prototype has no production database, replicated queue, immutable object store, or formal backup system. Local replay/audit/queue files are test adapters only. Source is in GitHub; keys and operational data must never be assumed recoverable from Git. No RTO or RPO has been approved or measured.
 
 ## Recovery assets
 
@@ -10,7 +10,7 @@ Maintain protected copies of source/tag references, immutable artifacts, deploym
 
 ## Required planning
 
-Service owners must complete a business-impact analysis and approve RTO/RPO per component. Define regional/data-sovereignty constraints, backup frequency, retention, encryption, access, restoration order, degraded-mode behavior, and communications.
+Service owners must complete a business-impact analysis and approve RTO/RPO per component. Define regional/data-sovereignty constraints, backup frequency, retention, encryption, access, restoration order, degraded-mode behavior, and communications. Apply the architecture and tests in `PERSISTENCE.md`.
 
 ## Recovery sequence
 
@@ -18,4 +18,4 @@ Declare the event; protect evidence; establish trusted control-plane access; res
 
 ## Exercises
 
-Conduct tabletop exercises at least semiannually and technical restore tests at a risk-approved cadence. Record measured recovery times, data loss, control failures, owners, and deadlines. A backup is not accepted until restoration has been demonstrated.
+Conduct tabletop exercises at least semiannually and technical restore tests at a risk-approved cadence. Record measured recovery times, data loss, policy/replay/audit/queue consistency, control failures, owners, and deadlines. A backup is not accepted until restoration has been demonstrated against approved objectives.
