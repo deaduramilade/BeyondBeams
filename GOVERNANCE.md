@@ -19,7 +19,7 @@ Source access remains private. Owners grant least privilege through named accoun
 
 ## Separation of duties
 
-Development, security review, privacy/legal review, release approval, production operations, and emergency authorization are distinct duties. A change author cannot be its sole reviewer or release approver. High-impact policy, identity, cryptography, model, data, and deployment changes require independent security and privacy review plus service-owner approval.
+Development, security review, privacy/legal review, release approval, production operations, and emergency authorization are distinct duties. A change author cannot be its sole reviewer or release approver. High-impact policy, identity, cryptography, model, data, persistence, monitoring, and deployment changes require independent security and privacy review plus service-owner approval. Policy author, legal/rights approver, publisher, activator, and rollback authority must be separated according to risk.
 
 ## Public-sector accountability
 
@@ -31,7 +31,7 @@ Material changes require an issue, impact/risk assessment, ADR where applicable,
 
 ## People affected by decisions
 
-Deployments must provide accessible notice, correction, objection, explanation, appeal, human review, and remedy channels appropriate to the service and jurisdiction. No receipt is used to deny a remedy. Oversight bodies may inspect evidence under lawful access controls, and public reporting should disclose aggregate use, errors, incidents, appeals, and remediation without exposing protected data.
+Deployments must provide accessible notice, correction, objection, explanation, appeal, human review, remedy, status, and non-digital channels appropriate to the service and jurisdiction. Assign conflict-free authorized reviewers, prohibit self-review, record recusal/override reason codes and audit evidence, and distinguish model recommendations from accountable decisions. No receipt is used to deny a remedy. Oversight bodies may inspect evidence under lawful access controls, and public reporting should disclose aggregate use, errors, incidents, appeals, and remediation without exposing protected data.
 
 ## Audit and disclosure
 

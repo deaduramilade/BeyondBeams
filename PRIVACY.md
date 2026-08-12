@@ -4,7 +4,7 @@ This file documents engineering expectations; it is not yet a complete end-user 
 
 ## Prototype behavior
 
-Clients submit operator-provided JSON to the API. The service processes it in memory and may print selected values to console. No database, analytics SDK, cookie system, or telemetry service is declared in the current manifest. Hosting and browser platforms may introduce separate processing that must be assessed.
+Clients submit validated JSON and signed authorization context. The service processes payloads in memory; receipts/audit/queue use digests and opaque references rather than raw payloads. No external analytics SDK, cookie system, production database, or telemetry vendor is selected. Hosting, identity, logging, metrics, tracing, backup, and support platforms introduce processing that must be assessed.
 
 ## Production notice requirements
 

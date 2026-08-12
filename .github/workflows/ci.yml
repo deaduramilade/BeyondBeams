@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm audit --audit-level=low
+      - name: Generate CycloneDX dependency SBOM
+        run: npm sbom --sbom-format cyclonedx > sbom.cdx.json
+      - name: Retain SBOM as build evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-sbom-${{ github.sha }}
+          path: sbom.cdx.json
+          if-no-files-found: error
+          retention-days: 30
+      - name: Parse JSON
+        run: node -e "const fs=require('fs');for(const f of fs.readdirSync('.').filter(x=>x.endsWith('.json')))JSON.parse(fs.readFileSync(f))"
+      - name: Scan tracked files for credential material
+        run: '! git grep -nEI -- ''BEGIN (RSA |EC |OPENSSH )?PRIVATE''\ KEY''|gh[pousr]_[A-Za-z0-9_]{20,}|AIza[0-9A-Za-z_-]{35}'''

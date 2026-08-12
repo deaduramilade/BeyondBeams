@@ -28,7 +28,7 @@ This file governs automated assistants working in this repository. Active human 
 
 ## Validation
 
-Run syntax checks, JSON parsing, relevant tests, a secret scan, and `git diff --check`. The current `npm test` script deliberately fails because no automated runner is configured; never report it as passing. Update documentation and `PROJECT_STATUS.md` when behavior or risk changes.
+Run syntax checks, JSON parsing, relevant tests, a secret scan, and `git diff --check`. `npm test` uses Node's built-in deterministic test runner; report its actual result. Update documentation and `PROJECT_STATUS.md` when behavior or risk changes.
 
 ## Security boundaries
 

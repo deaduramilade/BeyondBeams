@@ -2,7 +2,7 @@
 
 ## Current state
 
-There is no automated test framework or CI workflow. `npm test` exits with “no test specified.” Existing `test-*.js` files are executable demonstrations that log outcomes and do not reliably fail the process on assertion failures.
+The repository uses Node's built-in `node:test` runner and a GitHub Actions workflow. `npm test` runs deterministic tests under `test/*.test.js`; legacy `test-*.js` files remain demonstrations and are not discovered by the test command.
 
 ## Existing scripts
 
@@ -14,14 +14,15 @@ There is no automated test framework or CI workflow. `npm test` exits with “no
 
 ## Required test layers
 
-1. Unit tests for hashing, signing, verification, expiry, malformed envelopes, key mismatch, and action routing.
-2. Replay tests backed by a future nonce store.
+1. Unit tests for hashing, signing, verification, expiry, malformed envelopes, key mismatch, policy packs, and action routing.
+2. Replay, audit, policy-decision, queue-idempotency, lease/retry, and metrics tests.
 3. API integration tests for authentication, malformed JSON, schemas, status codes, CORS, size limits, and error redaction.
 4. Contract tests for each action request and response.
-5. PWA/dashboard tests for accessibility, installability, localization, configuration, and error handling.
+5. PWA/dashboard regression tests for accessibility semantics, localization, connectivity/error handling, installability, and credential non-persistence; independent browser/device/assistive-technology testing remains required.
 6. Security tests for abuse, rate limits, dependency advisories, and secret leakage.
 7. Copilot solution validation after export changes.
+8. Independent WCAG/assistive-technology, jurisdictional, provider-contract, timed-restore, load, alert-delivery, and incident/shutdown testing before live use.
 
 ## Acceptance criteria
 
-Tests must be deterministic, isolated, use ephemeral keys and synthetic data, avoid network dependence unless explicitly integration-scoped, and return a non-zero exit code on failure. Pull requests should block on tests, lint/syntax, dependency review, secret scanning, and Markdown/link checks. Coverage thresholds should be adopted after a real runner exists; security-critical branches require direct tests regardless of aggregate coverage.
+Tests must be deterministic, isolated, use ephemeral keys and synthetic data, avoid external network dependence, and return a non-zero exit code on failure. CI blocks on tests, syntax, dependency audit, JSON parsing, and a tracked-file credential scan. Security-critical branches require direct tests regardless of aggregate coverage.

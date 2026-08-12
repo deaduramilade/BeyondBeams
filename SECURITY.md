@@ -7,17 +7,17 @@ Only the latest `main` commit is supported during pre-production. Do not disclos
 ## Credential policy
 
 - Store production secrets in an approved secret manager, never Git or client bundles.
-- Restrict and rotate API keys and `OWNER_PRIVATE_KEY`; audit retrieval.
+- Restrict, scope, expire, and rotate OIDC clients/tokens, issuer/publisher/receipt signing identities, metrics credentials, and store credentials; audit use and retrieval.
 - Treat all browser configuration as public and never place privileged credentials in client bundles.
 - If exposure occurs, revoke first, preserve evidence, then coordinate history cleanup.
 
 ## Cryptographic status
 
-The utility generates EC P-256 keys and signing uses SHA-256. Some source error messages incorrectly call these RSA keys. A2SPA has not received independent review and lacks persisted replay prevention, formal canonicalization, external authorization issuance, key identifiers, revocation, and algorithm agility. It is not a certified zero-trust control.
+The protocol uses P-256/ES256 and SHA-256 with versioned canonical serialization. A2SPA-R envelopes are externally verified, nonces are consumed by a local atomic replay store, signed receipts link authorization/payload/policy digests, and policy packs have separate publisher signatures and revocation/rollback state. Independent cryptographic review, selective disclosure, and production KMS/HSM custody remain open. This is not a certified zero-trust control.
 
 ## Production gate
 
-Do not expose this service to production until it has TLS, restricted CORS, schema and size validation, rate limiting, secret management, non-root execution, dependency scanning, tamper-evident audit logging, health/readiness endpoints, monitoring, tested recovery, key rotation, and independent security assessment.
+Do not expose this service to production until it has TLS, approved identity/authorization and policy publication, secret management, non-root execution, dependency scanning, replicated tamper-evident audit, durable replay, managed signing, centralized monitoring, tested backup/restore, key/policy rotation, incident exercises, and independent assessments. Current controls are prototype hardening, not production approval.
 
 ## Incident handling
 

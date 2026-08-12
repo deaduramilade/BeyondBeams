@@ -8,6 +8,22 @@ Oblivion-AI exists to help public institutions authorize consequential AI-assist
 
 The platform's target capability is **A2SPA-R: Sovereign AI Action Receipts**. An authorized action should bind the actor or workload, purpose, legal/policy authority, approved data use, model and tool provenance, policy version, jurisdiction, human oversight, time, nonce, and retention class. The resulting receipt should disclose only the evidence needed by an operator, auditor, oversight body, court, or affected person while retaining integrity and revocation status.
 
+## Naming candidates
+
+The following two-word names are candidates for a future project identity. Recording them here does not rename the project or its technical identifiers.
+
+1. **Static Bloom** (`staticbloom`) - the leading candidate; memorable, distinctive, and technical without sounding generic.
+2. **Velvet Relay** (`velvetrelay`) - suggests controlled communication with a softer, approachable identity.
+3. **Hollow Current** (`hollowcurrent`) - evokes an unseen flow of authorization and evidence.
+4. **Rare Circuit** (`rarecircuit`) - conveys a selective, specialized technical system.
+5. **Midnight Vector** (`midnightvector`) - suggests direction, precision, and security operations.
+
+1. **Hollow Signal** — `hollowsignal`
+2. **Velvet Circuit** — `velvetcircuit`
+3. **Parallel Shade** — `parallelshade`
+4. **Silent Current** — `silentcurrent`
+5. **Phantom Thread** — `phantomthread`
+
 ## Global principles
 
 1. **Local authority:** Every deployment maps local law, policy, language, records, accessibility, procurement, security, and constitutional obligations into versioned policy packs approved by the deploying institution.

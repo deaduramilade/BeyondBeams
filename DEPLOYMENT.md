@@ -8,12 +8,12 @@ The GitHub Student Developer Pack can support learning and development: Codespac
 
 ## Required architecture
 
-Deploy the PWA and immutable, pinned API artifact behind TLS ingress and a web application firewall. Run the API as a non-root identity on a read-only filesystem, bind internally, restrict egress, inject secrets from a managed vault, centralize redacted logs, and expose separate health/readiness signals. Separate development, staging, and production accounts, credentials, networks, data, keys, policy packs, and audit stores. Support government-controlled, private-cloud, or approved public-cloud topology without changing receipt semantics.
+Deploy the PWA and immutable pinned API artifact behind TLS ingress and a web application firewall. Run the API non-root on a read-only filesystem, bind internally, restrict egress, inject secrets from a vault, centralize redacted telemetry, and expose restricted probes. Separate environments, credentials, networks, data, publisher/issuer/receipt keys, policy packs, replay/audit/queue/object stores, backups, and monitoring. Apply `PERSISTENCE.md` and `OBSERVABILITY.md` without changing receipt semantics.
 
 ## Promotion process
 
 1. Merge an approved pull request with passing security and quality gates.
-2. Build once from a tagged commit; produce an SBOM and provenance evidence.
+2. Build once from a tagged commit; produce and verify the retained SBOM, artifact digest, dependency-audit disposition, metadata, and provenance evidence described in `RELEASE_ASSURANCE.md`.
 3. Scan dependencies and artifact; block unresolved critical findings.
 4. Deploy to staging with synthetic data and staging-only keys.
 5. Run smoke, contract, authorization, rollback, and observability checks.
@@ -30,4 +30,4 @@ Retain the last verified artifact and compatible configuration. Roll back on aut
 
 ## Release verification
 
-Confirm TLS, restricted CORS, no public debug output, least privilege, secret injection, key match, rate limits, audit delivery, alerts, backups, runbook access, and approved data location. Production remains blocked while the controls in `SECURITY.md` and `PROJECT_STATUS.md` are open.
+Confirm TLS, CORS, safe output, least privilege, secret injection, OIDC/JWKS, authorization and policy trust/revocation, managed signing, replay/audit/queue/object durability, telemetry, clock health, alerts, backups/timed restore, load results, runbook access, and approved data locations. Production remains blocked while `SECURITY.md` and `PROJECT_STATUS.md` controls are open.
