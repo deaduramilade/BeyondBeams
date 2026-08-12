@@ -10,25 +10,55 @@
   <title>Oblivion-AI Authorization Console</title>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
   <header class="masthead">
     <div><p class="eyebrow">Public-sector control plane</p><h1>Oblivion-AI</h1><p class="subtitle">Authorization and accountability console</p></div>
-    <span class="status" aria-label="Environment status">Prototype</span>
+    <div class="header-controls">
+      <label for="language">Language</label>
+      <select id="language" name="language" autocomplete="off">
+        <option value="en">English</option>
+        <option value="fr">Francais</option>
+      </select>
+      <span class="status" aria-label="Environment status" data-i18n="prototype">Prototype</span>
+    </div>
   </header>
-  <main>
-    <section class="notice" aria-labelledby="notice-title"><h2 id="notice-title">Development environment</h2><p>Actions and outcomes are simulated. Do not enter personal, classified, or operational data.</p></section>
+  <main id="main-content" tabindex="-1">
+    <p id="connection-status" class="connection-status" role="status" aria-live="polite"></p>
+    <section class="notice" aria-labelledby="notice-title"><h2 id="notice-title" data-i18n="developmentTitle">Development Environment</h2><p data-i18n="developmentBody">Actions and outcomes are simulated recommendations. Do not enter personal, classified, or operational data.</p></section>
     <section aria-labelledby="actions-title">
-      <div class="section-heading"><div><p class="eyebrow">Authorized workflows</p><h2 id="actions-title">Action catalogue</h2></div></div>
+      <div class="section-heading"><div><p class="eyebrow" data-i18n="workflowsEyebrow">Authorized workflows</p><h2 id="actions-title" data-i18n="actionsTitle">Action Catalogue</h2></div></div>
       <div class="action-grid">
-        <button data-action="realtime.defense.breach.detect" data-payload='{"breachId":"SYNTHETIC-001","affectedRecords":10,"dataFlow":"public-service-portal"}'>Breach response</button>
-        <button data-action="compliance.automation.dpia.generate" data-payload='{"projectName":"Public Service Portal","riskLevel":"High"}'>Impact assessment</button>
-        <button data-action="predictive.analytics.risk.model" data-payload='{"dataFlow":"Public Service Portal"}'>Risk model</button>
-        <button data-action="regulatory.oversight.perform" data-payload='{"controller":"Public Authority"}'>Oversight review</button>
-        <button data-action="rights.management.exercise" data-payload='{"rightType":"Human review","subjectId":"SYNTHETIC-002"}'>Rights and remedy</button>
+        <button type="button" data-action="realtime.defense.breach.detect" data-payload='{"breachId":"SYNTHETIC-001","affectedRecords":10,"dataFlow":"public-service-portal"}' data-i18n="breachAction">Breach Response</button>
+        <button type="button" data-action="compliance.automation.dpia.generate" data-payload='{"projectName":"Public Service Portal","riskLevel":"High"}' data-i18n="impactAction">Impact Assessment</button>
+        <button type="button" data-action="predictive.analytics.risk.model" data-payload='{"dataFlow":"Public Service Portal"}' data-i18n="riskAction">Risk Model</button>
+        <button type="button" data-action="regulatory.oversight.perform" data-payload='{"controller":"Public Authority"}' data-i18n="oversightAction">Oversight Review</button>
+        <button type="button" data-action="rights.management.exercise" data-payload='{"rightType":"Human review","subjectId":"SYNTHETIC-002"}' data-i18n="rightsAction">Rights &amp; Remedy</button>
       </div>
     </section>
+    <form id="authorization-form" novalidate>
+      <h2 data-i18n="authorizationTitle">Development Authorization</h2>
+      <p id="selected-action" class="selected-action" aria-live="polite" data-i18n="selectAction">Select an action before submitting.</p>
+      <div class="form-field">
+        <label for="identity-token" data-i18n="tokenLabel">Short-Lived Identity Token</label>
+        <input id="identity-token" name="identity-token" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="token-help token-error" required>
+        <p id="token-help" class="field-help" data-i18n="tokenHelp">The token remains in this page only for the current request.</p>
+        <p id="token-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <div class="form-field">
+        <label for="authorization-envelope" data-i18n="envelopeLabel">A2SPA-R Authorization Envelope</label>
+        <textarea id="authorization-envelope" name="authorization-envelope" rows="8" autocomplete="off" autocapitalize="none" spellcheck="false" aria-describedby="envelope-help envelope-error" required></textarea>
+        <p id="envelope-help" class="field-help" data-i18n="envelopeHelp">Paste a valid externally issued JSON envelope. Never paste a private key.</p>
+        <p id="envelope-error" class="field-error" aria-live="polite"></p>
+      </div>
+      <button id="submit-action" class="primary-action" type="submit" data-i18n="submitAction">Submit Authorized Action</button>
+    </form>
     <section class="result-panel" aria-labelledby="result-title">
-      <div class="section-heading"><div><p class="eyebrow">Execution evidence</p><h2 id="result-title">Result</h2></div></div>
-      <pre id="output" aria-live="polite">Select an authorized workflow.</pre>
+      <div class="section-heading"><div><p class="eyebrow" data-i18n="evidenceEyebrow">Execution evidence</p><h2 id="result-title" data-i18n="resultTitle">Result</h2></div></div>
+      <pre id="output" role="status" aria-live="polite" aria-atomic="true" tabindex="0" data-i18n="initialResult">No action has been submitted.</pre>
+    </section>
+    <section class="service-path" aria-labelledby="service-path-title">
+      <h2 id="service-path-title" data-i18n="serviceTitle">Review, Appeal &amp; Manual Service</h2>
+      <p data-i18n="serviceBody">This prototype cannot accept a real appeal or provide a manual service route. A deploying institution must publish accessible contact, correction, human-review, appeal, and non-digital service channels before use.</p>
     </section>
   </main>
   <script src="/app.js" defer></script>
