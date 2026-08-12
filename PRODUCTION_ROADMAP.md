@@ -12,12 +12,15 @@ Produce a secure, operable, accessible release candidate with complete instituti
 
 ### 1. Guided user and operator experience
 
-- Replace bearer-token and A2SPA-R JSON entry in normal use with standards-based sign-in, an authenticated session, and server-side authorization issuance. Retain raw protocol data only in a restricted diagnostic interface.
+- Replace bearer-token entry in normal use with standards-based sign-in, an authenticated session, and server-side authorization issuance. Guided forms are the default input method and must not require users to obtain, edit, or paste an A2SPA-R authorization envelope.
+- Provide an optional input-method radio group with **Guided form** selected by default and **JSON input** available for users who already have compatible structured action data. The JSON textarea must remain hidden or disabled until **JSON input** is selected, and switching back to **Guided form** must disable the textarea without silently submitting its contents.
+- Treat optional JSON as action payload input, not as permission to bypass identity, policy, approval, or A2SPA-R controls. Parse it with a structured JSON parser, reject malformed, unknown, oversized, or schema-invalid fields, display errors next to the control, show the normalized data on the same review/confirmation screen, and obtain the signed authorization envelope through the trusted server-side service after validation.
+- Restrict full authorization envelopes, signatures, tokens, and protocol diagnostics to appropriately authorized diagnostic roles. Never ask an ordinary user to place private keys or credentials in the JSON field, and do not persist JSON drafts in browser storage unless an institution explicitly approves the data-handling design.
 - Implement guided forms for breach response, impact assessment, risk modelling, oversight review, and rights/remedy. Use appropriate text, number, date, select, radio, checkbox, file-upload, review, and confirmation controls with plain-language validation.
 - Add drafts, resume, cancellation, duplicate prevention, review summaries, submission confirmation, clear case references, status history, next steps, and understandable result summaries. Technical receipts remain available as evidence without becoming the primary user result.
 - Provide complete loading, empty, validation, permission-denied, conflict, timeout, offline, expired-session, partial-failure, and recovery states in English and French.
 
-**Exit evidence:** Usability-tested end-to-end journeys for every role and workflow; no ordinary journey requires token or JSON entry; automated and manual validation of success, error, interruption, and recovery paths.
+**Exit evidence:** Usability-tested end-to-end journeys for every role and workflow; no ordinary journey requires token or JSON entry; guided forms are selected by default; the JSON field becomes operable only after explicit radio selection; both input methods receive equivalent schema validation, review, authorization, policy, audit, error, interruption, and recovery controls.
 
 ### 2. Case management and governed decisions
 
@@ -59,7 +62,7 @@ Produce a secure, operable, accessible release candidate with complete instituti
 ### 6. Responsive, accessible, and inclusive service quality
 
 - Design and test every workflow for mobile, tablet, desktop, and widescreen layouts. Forms, tables, queues, dialogs, evidence views, and navigation must reflow without clipped text, incoherent overlap, hidden actions, or horizontal page scrolling.
-- Mobile layouts must support 320 CSS px and wider, touch and screen-reader operation, single-column forms, usable virtual-keyboard behavior, and compact case summaries without losing actions or status context.
+- Mobile layouts must support 320 CSS px and wider, touch and screen-reader operation, single-column forms, usable virtual-keyboard behavior, and compact case summaries without losing actions or status context. The input-method radio group and optional JSON textarea must remain labelled, operable, and visible without horizontal page scrolling.
 - Tablet layouts must cover portrait and landscape operation, touch targets, split or stacked views as space permits, and rotation without lost state or obstructed controls.
 - Desktop and widescreen layouts must constrain reading and form widths, use available space for useful queue/detail views, preserve clear focus order, and avoid sparse stretched content. Test common desktop widths through at least 1920 CSS px and representative browser zoom/reflow up to 400%.
 - Support keyboard-only use, visible focus, semantic structure, screen readers, speech input where applicable, reduced motion, contrast, localization expansion, accessible errors, low bandwidth, interrupted networks, and accessible documents.
@@ -85,7 +88,9 @@ Produce a secure, operable, accessible release candidate with complete instituti
 
 ## Phase 1 Exit Gate
 
-Phase 1 is complete only when all Phase 1 workstreams have traceable evidence, required engineering and security reviews are complete, production-class integrations pass in a staging environment, and no critical defect or unowned high risk remains. The resulting status is **PRODUCTION_READY_CANDIDATE — synthetic/staging use only**.
+Phase 1 is complete only when all Phase 1 workstreams have traceable evidence, required engineering and security reviews are complete, production-class integrations pass in a staging environment, and no critical defect or unowned high risk remains.
+
+**Phase 1 exit status: PRODUCTION_READY_CANDIDATE — synthetic/staging use only**
 
 ## Phase 2: Move to Live
 
