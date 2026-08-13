@@ -2,7 +2,7 @@
 
 ## Current implementation
 
-The prototype has file-backed replay, hash-chained audit, and reference queue stores. Writes use local locks and atomic replacement where applicable; the queue supports tenant/type/idempotency-key deduplication, leases, lease expiry, bounded retries, and dead-letter state. These stores support deterministic development tests on one host. They are not replicated databases, immutable object stores, transactional outboxes, or production durability evidence.
+The prototype has file-backed replay, hash-chained audit, case, and reference queue stores. Writes use local locks and atomic replacement where applicable; the queue supports tenant/type/idempotency-key deduplication, leases, lease expiry, bounded retries, and dead-letter state. Provider-neutral synthetic contracts additionally exercise atomic state/outbox mutation, schema migration, backup/restore digest checks, queue workers, immutable-record metadata, retention, and legal hold. These implementations support deterministic development tests on one host or in memory. They are not replicated databases, immutable object stores, transactional production outboxes, backup systems, or production durability evidence.
 
 ## Production target
 
