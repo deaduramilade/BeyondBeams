@@ -28,6 +28,17 @@ test('canonicalization and hashes are stable across object key order', () => {
   assert.equal(hashPayload({ b: 2, a: 1 }), hashPayload({ a: 1, b: 2 }));
 });
 
+test('canonicalization preserves digest invariants across generated object permutations', () => {
+  let seed = 0x12345678;
+  const next = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed; };
+  for (let round = 0; round < 100; round += 1) {
+    const entries = Array.from({ length: 6 }, (_, index) => [`field${index}`, { index, value: next() }]);
+    const first = Object.fromEntries(entries);
+    const shuffled = [...entries].sort(() => (next() & 1) ? 1 : -1);
+    assert.equal(hashPayload(first), hashPayload(Object.fromEntries(shuffled)));
+  }
+});
+
 test('signs and verifies an envelope bound to its payload', () => {
   const signed = signA2SPAPayload('example.action', payload, keys.privateKey, { timestamp: now, nonce: 'test-nonce' });
   assert.deepEqual(verifyA2SPAPayload(signed, payload, keys.publicKey, { now }), { valid: true });
