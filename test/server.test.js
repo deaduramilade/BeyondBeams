@@ -14,6 +14,8 @@ const { FileReplayStore } = require('../src/a2spa-r/replay');
 const { verifyReceipt } = require('../src/a2spa-r/receipt');
 const { AuditLedger } = require('../src/audit/ledger');
 const { createDevelopmentSigner } = require('../src/security/managed-signer');
+const { AuthorizationIssuer } = require('../src/security/authorization-issuer');
+const { SyntheticIdentityProvider } = require('../src/integrations/synthetic-platform');
 const { PolicyRegistry, issuePolicyPack, policyDigest } = require('../src/policy/policy-pack');
 
 const authorizationKeys = crypto.generateKeyPairSync('ec', { namedCurve: 'prime256v1', privateKeyEncoding: { type: 'pkcs8', format: 'pem' }, publicKeyEncoding: { type: 'spki', format: 'pem' } });
@@ -26,7 +28,7 @@ const policyPack = issuePolicyPack({
   rules: [{ id: 'permit-breach', effect: 'permit', actions: ['realtime.defense.breach.detect'], purposes: ['synthetic-test'], principalTypes: ['service'], humanApproval: { required: false, roles: [] }, rights: { notice: true, humanReview: true, appeal: true, remedy: true } }]
 }, policyKeys.privateKey);
 const policy = { id: policyPack.id, version: policyPack.version, digest: policyDigest(policyPack) };
-const principal = { id: 'service-subject', issuer: 'https://identity.example.invalid', tenantId: 'tenant-a', workloadId: 'workload-a', type: 'service', scopes: ['action:realtime.defense.breach.detect', 'audit:verify', 'audit:export'], tokenId: 'token-1' };
+const principal = { id: 'service-subject', issuer: 'https://identity.example.invalid', tenantId: 'tenant-a', workloadId: 'workload-a', type: 'service', scopes: ['action:realtime.defense.breach.detect', 'audit:verify', 'audit:export', 'case:create', 'case:read', 'case:review'], roles: ['reviewer'], tokenId: 'token-1' };
 const requestBody = { actionType: 'realtime.defense.breach.detect', payload: { breachId: 'SYNTHETIC-1', affectedRecords: 10, dataFlow: 'test-flow' } };
 
 function issueAuthorization(body = requestBody, overrides = {}) {
@@ -48,12 +50,13 @@ function createFixture(t, overrides = {}) {
     authorizationAudience: 'executor.synthetic',
     authorizationKeys: new KeyStore([{ issuer: 'issuer.synthetic', keyId: 'authorization-key-1', algorithm: 'ES256', publicKey: authorizationKeys.publicKey }]),
     authorizationIssuers: ['issuer.synthetic'], policy, deploymentDigest: 'b'.repeat(64), receiptKeyId: 'receipt-key-1',
-    corsOrigins: ['https://allowed.example'], bodyLimit: '4kb', rateLimit: 10, rateWindowMs: 60000, clockSkewSeconds: 30, metricsToken: 'synthetic-metrics-token',
+    caseDirectory: path.join(root, 'cases'), corsOrigins: ['https://allowed.example'], bodyLimit: '4kb', rateLimit: 10, rateWindowMs: 60000, clockSkewSeconds: 30, metricsToken: 'synthetic-metrics-token',
     ...overrides.config
   };
   return {
     config, auditLedger, replayStore, policyRegistry,
     signer: overrides.signer || createDevelopmentSigner({ keyId: 'receipt-key-1', privateKey: receiptKeys.privateKey }),
+    authorizationIssuer: overrides.authorizationIssuer || new AuthorizationIssuer({ issuer: 'issuer.synthetic', keyId: 'authorization-key-1', privateKey: authorizationKeys.privateKey, audience: 'executor.synthetic', policy: { ...policy, institution: 'institution.synthetic', jurisdiction: 'jurisdiction.synthetic' } }),
     identityVerifier: overrides.identityVerifier || (async token => { if (token !== 'synthetic-token') throw Object.assign(new Error(), { code: 'INVALID_TOKEN' }); return principal; })
   };
 }
@@ -150,6 +153,105 @@ test('protects tenant-scoped audit verification and export and logs access', asy
     const body = await exported.json();
     assert.equal(body.records.every(record => record.data.tenant === principal.tenantId), true);
     assert.equal(body.records.some(record => record.type === 'audit_accessed'), true);
+  });
+});
+
+test('creates cases through policy-bound server authorization and supports same-origin sessions', async t => {
+  const fixture = createFixture(t);
+  fixture.identityProvider = new SyntheticIdentityProvider();
+  fixture.identityProvider.sessions.set('session-token', { principal: { ...principal, type: 'service' }, expiresAt: Date.now() + 60000, generation: 1 });
+  await withServer(fixture, async base => {
+    const csrfToken = fixture.identityProvider.issueCsrfToken('session-token');
+    const sessionHeaders = { 'content-type': 'application/json', cookie: 'oblivion_session=session-token', origin: base, 'x-csrf-token': csrfToken };
+    const guided = await fetch(`${base}/api/cases`, { method: 'POST', headers: sessionHeaders, body: JSON.stringify({ inputMethod: 'guided', actionType: requestBody.actionType, payload: requestBody.payload, purpose: 'synthetic-test' }) });
+    assert.equal(guided.status, 201);
+    const created = await guided.json();
+    assert.equal(created.authorization.issued, true);
+    assert.equal(created.case.state, 'submitted');
+    const listed = await fetch(`${base}/api/cases`, { headers: { cookie: 'oblivion_session=session-token' } });
+    assert.equal((await listed.json()).cases.length, 1);
+    const invalidJson = await fetch(`${base}/api/cases`, { method: 'POST', headers: sessionHeaders, body: JSON.stringify({ inputMethod: 'json', actionType: requestBody.actionType, payload: { ...requestBody.payload, unknown: true } }) });
+    assert.equal(invalidJson.status, 400);
+  });
+});
+
+test('wires OIDC session, CSRF, rotation and logout contracts to fail-closed HTTP routes', async t => {
+  const fixture = createFixture(t);
+  const identityProvider = new SyntheticIdentityProvider();
+  fixture.identityProvider = identityProvider;
+  let nonce;
+  fixture.tokenExchange = ({ code, codeVerifier }) => {
+    assert.equal(code, 'synthetic-code');
+    assert.ok(codeVerifier.length >= 64);
+    return { nonce, principal: { ...principal, type: 'service' } };
+  };
+  await withServer(fixture, async base => {
+    const login = await fetch(`${base}/auth/login?returnTo=%2Fcases`, { redirect: 'manual' });
+    assert.equal(login.status, 302);
+    const authorization = new URL(login.headers.get('location'));
+    nonce = authorization.searchParams.get('nonce');
+    const state = authorization.searchParams.get('state');
+    assert.equal(authorization.searchParams.get('code_challenge_method'), 'S256');
+
+    const callback = await fetch(`${base}/auth/callback?code=synthetic-code&state=${state}`, { redirect: 'manual' });
+    assert.equal(callback.status, 303);
+    assert.equal(callback.headers.get('location'), '/cases');
+    const cookie = callback.headers.get('set-cookie').split(';')[0];
+    assert.match(callback.headers.get('set-cookie'), /HttpOnly; SameSite=Lax/);
+    assert.equal((await fetch(`${base}/auth/callback?code=replay&state=${state}`, { redirect: 'manual' })).status, 401);
+
+    const csrfResponse = await fetch(`${base}/auth/csrf`, { headers: { cookie } });
+    const csrfToken = (await csrfResponse.json()).csrfToken;
+    const body = JSON.stringify({ inputMethod: 'guided', actionType: requestBody.actionType, payload: requestBody.payload, purpose: 'synthetic-test' });
+    assert.equal((await fetch(`${base}/api/cases`, { method: 'POST', headers: { 'content-type': 'application/json', cookie }, body })).status, 403);
+    assert.equal((await fetch(`${base}/api/cases`, { method: 'POST', headers: { 'content-type': 'application/json', cookie, origin: base, 'x-csrf-token': `${csrfToken}x` }, body })).status, 403);
+    assert.equal((await fetch(`${base}/api/cases`, { method: 'POST', headers: { 'content-type': 'application/json', cookie, origin: base, 'x-csrf-token': csrfToken }, body })).status, 201);
+
+    const refresh = await fetch(`${base}/auth/session/refresh`, { method: 'POST', headers: { cookie, origin: base, 'x-csrf-token': csrfToken } });
+    assert.equal(refresh.status, 204);
+    const rotatedCookie = refresh.headers.get('set-cookie').split(';')[0];
+    assert.notEqual(rotatedCookie, cookie);
+    assert.equal((await fetch(`${base}/auth/csrf`, { headers: { cookie } })).status, 401);
+    const rotatedCsrf = (await (await fetch(`${base}/auth/csrf`, { headers: { cookie: rotatedCookie } })).json()).csrfToken;
+    const logout = await fetch(`${base}/auth/logout`, { method: 'POST', headers: { cookie: rotatedCookie, origin: base, 'x-csrf-token': rotatedCsrf } });
+    assert.equal(logout.status, 200);
+    assert.match(logout.headers.get('set-cookie'), /Expires=Thu, 01 Jan 1970/);
+    assert.equal((await fetch(`${base}/auth/csrf`, { headers: { cookie: rotatedCookie } })).status, 401);
+  });
+});
+
+test('browser authentication routes fail closed without a session provider', async t => {
+  const fixture = createFixture(t);
+  await withServer(fixture, async base => {
+    assert.equal((await fetch(`${base}/auth/callback?code=x&state=${'a'.repeat(32)}`)).status, 503);
+    assert.equal((await fetch(`${base}/auth/csrf`, { headers: { Authorization: 'Bearer synthetic-token' } })).status, 400);
+  });
+});
+
+test('serves the browser shell for all user-facing page routes', async t => {
+  const fixture = createFixture(t);
+  await withServer(fixture, async base => {
+    for (const route of ['/', '/sign-in', '/agents', '/agents/real-time-defense', '/agents/rights-management', '/dashboard', '/cases/new', '/cases/case_synthetic', '/review', '/admin/audit']) {
+      const response = await fetch(`${base}${route}`);
+      assert.equal(response.status, 200);
+      assert.match(await response.text(), /<main id="main-content"/);
+    }
+  });
+});
+
+test('protects case detail, queue, assignment, schedule, notes, evidence, and transitions', async t => {
+  const fixture = createFixture(t); fixture.identityVerifier = async () => ({ ...principal, roles: ['reviewer', 'administrator'] });
+  await withServer(fixture, async base => {
+    const headers = { 'content-type': 'application/json', Authorization: 'Bearer synthetic-token' };
+    const created = (await (await fetch(`${base}/api/cases`, { method: 'POST', headers, body: JSON.stringify({ inputMethod: 'guided', actionType: requestBody.actionType, payload: requestBody.payload, purpose: 'synthetic-test' }) })).json()).case;
+    assert.equal((await fetch(`${base}/api/cases/${created.caseId}`, { headers })).status, 200);
+    await fetch(`${base}/api/cases/${created.caseId}/transition`, { method: 'POST', headers, body: JSON.stringify({ target: 'triage' }) });
+    assert.equal((await fetch(`${base}/api/cases/${created.caseId}/assign`, { method: 'POST', headers, body: JSON.stringify({ assignedTo: 'reviewer-b', reason: 'coverage' }) })).status, 200);
+    assert.equal((await fetch(`${base}/api/cases/${created.caseId}/schedule`, { method: 'POST', headers, body: JSON.stringify({ deadlineAt: '2099-01-01T00:00:00Z', priority: 'high' }) })).status, 200);
+    assert.equal((await fetch(`${base}/api/cases/${created.caseId}/notes`, { method: 'POST', headers, body: JSON.stringify({ text: 'Synthetic note', visibility: 'internal' }) })).status, 200);
+    assert.equal((await fetch(`${base}/api/cases/${created.caseId}/evidence`, { method: 'POST', headers, body: JSON.stringify({ evidence: { name: 'scan.txt', mediaType: 'text/plain', size: 4, digest: 'a'.repeat(64), storageRef: 'evidence://synthetic/1', scanStatus: 'clean' } }) })).status, 200);
+    const queue = await (await fetch(`${base}/api/cases?assignedTo=reviewer-b&priority=high`, { headers })).json();
+    assert.equal(queue.cases.length, 1); assert.equal(queue.cases[0].notes.length, 1); assert.equal(queue.cases[0].evidence.length, 1);
   });
 });
 
