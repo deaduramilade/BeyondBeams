@@ -111,4 +111,4 @@ All unresolved risks are tracked in [RISK_REGISTER.md](RISK_REGISTER.md). Each e
 
 ## Current conclusion
 
-Signed policy, queue, audit/replay, and metrics reference implementations now exist, but no independent assessments, real jurisdictional pack, authority, institutional deployment boundary, persistence/telemetry providers, named risk acceptor, approved SLO/RTO/RPO, exercised restore/incident procedures, or production evidence were supplied. Therefore the only supported status is **NOT_READY — development/synthetic evaluation only**.
+Signed policy, queue, audit/replay, case, metrics, and provider-contract reference implementations now exist. The provider contracts have deterministic synthetic lifecycle and failure tests, but no real integration evidence, independent assessments, jurisdictional pack, authority, institutional deployment boundary, persistence/telemetry providers, named risk acceptor, approved SLO/RTO/RPO, exercised production-like restore/incident procedures, or production evidence were supplied. Therefore the only supported status is **NOT_READY — development/synthetic evaluation only**.
