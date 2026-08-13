@@ -20,11 +20,13 @@ Copy `.env.example` to an ignored local file as a reference; the project does no
 ## Run
 
 ```bash
-node server.js
+npm start
 node src/run.js "realtime.defense.breach.detect" "{\"breachId\":\"DEV-001\"}"
 ```
 
-The server requires OIDC/JWKS, A2SPA-R trust, a signed active policy, ignored local replay/audit paths, and a development receipt signer. The dashboard derives its endpoint from the current origin; obtain bearer identity and external authorization through an approved development issuer.
+`npm start` serves the public dashboard on `http://127.0.0.1:3000` with ephemeral in-memory keys and ignored local state. It accepts loopback hosts only and intentionally leaves sign-in and protected workflows unavailable.
+
+The configured integration server (`node server.js`) requires OIDC/JWKS, A2SPA-R trust, a signed active policy, ignored local replay/audit paths, and a development receipt signer. The dashboard derives its endpoint from the current origin; obtain bearer identity and external authorization through an approved development issuer.
 
 ## Workflow
 
