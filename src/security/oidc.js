@@ -90,9 +90,16 @@ function createOidcVerifier(options) {
       workloadId: claims.workload_id,
       type: claims.principal_type,
       scopes,
+      roles: parseRoles(claims.roles),
       tokenId: claims.jti || null
     });
   };
+}
+
+function parseRoles(value) {
+  if (value === undefined) return [];
+  if (!Array.isArray(value) || value.some(role => typeof role !== 'string')) throw authError('INVALID_TOKEN_CLAIMS');
+  return [...new Set(value)];
 }
 
 function parseSegment(segment) {

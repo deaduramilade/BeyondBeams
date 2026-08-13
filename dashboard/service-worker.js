@@ -1,6 +1,6 @@
 'use strict';
-const CACHE = 'oblivion-shell-v4';
-const SHELL = ['/', '/style.css', '/app.js', '/manifest.webmanifest'];
+const CACHE = 'oblivion-shell-v6';
+const SHELL = ['/', '/sign-in', '/agents', '/dashboard', '/cases/new', '/review', '/admin/audit', '/style.css', '/app.js', '/manifest.webmanifest'];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL))));
 self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key))))));
 self.addEventListener('fetch', event => {

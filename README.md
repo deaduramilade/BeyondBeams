@@ -22,12 +22,13 @@ Oblivion-AI is an early-stage sovereign AI authorization and accountability fabr
 Prerequisites are Node.js, npm, Git, and a modern browser. GitHub Codespaces may be used as a development environment; it is not application hosting. A production deployment must use an approved sovereign or jurisdictionally acceptable platform, such as a government-controlled Azure region where contractually appropriate.
 
 ```bash
- npm ci
-node src/a2spa-crypto/keygen.js
-node server.js
+npm ci
+npm start
 ```
 
-Configure OIDC/JWKS identity, A2SPA-R issuer public keys, signed policy packs, ignored local replay/audit directories, and a development receipt signer before starting. See [Configuration](CONFIGURATION.md). The default URL is `http://127.0.0.1:3000`.
+The development-only launcher generates ephemeral keys in memory, writes non-key state under ignored `runtime-data/`, binds only to loopback, and leaves protected workflows unavailable until a real identity provider is configured. The default URL is `http://127.0.0.1:3000`.
+
+For configured integration testing, inject OIDC/JWKS identity, A2SPA-R issuer public keys, signed policy packs, ignored local replay/audit directories, and a development receipt signer, then run `node server.js`. See [Configuration](CONFIGURATION.md).
 
 ## Action families
 

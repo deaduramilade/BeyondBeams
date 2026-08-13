@@ -31,6 +31,8 @@ jobs:
           if-no-files-found: error
           retention-days: 30
       - name: Parse JSON
-        run: node -e "const fs=require('fs');for(const f of fs.readdirSync('.').filter(x=>x.endsWith('.json')))JSON.parse(fs.readFileSync(f))"
+        run: npm run validate:json
       - name: Scan tracked files for credential material
-        run: '! git grep -nEI -- ''BEGIN (RSA |EC |OPENSSH )?PRIVATE''\ KEY''|gh[pousr]_[A-Za-z0-9_]{20,}|AIza[0-9A-Za-z_-]{35}'''
+        run: npm run scan:secrets
+      - name: Check patch whitespace
+        run: git diff --check HEAD
