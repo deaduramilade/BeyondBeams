@@ -4,6 +4,8 @@
 
 The service emits structured JSON logs and a credential-protected `/metrics` endpoint. Current metrics cover request outcomes, policy decisions, and policy/audit/receipt-signer readiness. Labels are deliberately low-cardinality and must never contain tenant, actor, token, request payload, subject identifier, key material, or personal data. Send stdout/stderr to an approved centralized collector over authenticated encrypted transport; restrict access, redact at source, pin storage/backup regions, integrity-protect operational audit exports, and apply approved retention/legal hold.
 
+The provider-neutral telemetry contract has an in-memory synthetic implementation for rejecting named sensitive fields, measuring a supplied clock offset, and evaluating alert rules linked to runbooks. This proves interface behavior only. It does not collect runtime logs, metrics, or traces centrally; deliver alerts; monitor host time; staff on-call; or provide retention, sovereignty, availability, and incident evidence.
+
 Production instrumentation must add latency histograms, authorization/replay/authentication/rate-limit outcomes, audit append/integrity/checkpoint age, queue depth/oldest age/retry/dead-letter counts, persistence latency/errors/capacity, signer/key age/revocation/status, OIDC/JWKS cache and failure status, policy expiry/activation/revocation, backup age/restore evidence, clock offset, event-loop/resource saturation, and safe abuse/anomaly aggregates. Use W3C trace context only across approved service boundaries; sample deliberately and include opaque request/decision/receipt IDs, never payloads or credentials.
 
 ## SLI, SLO, and alert governance
