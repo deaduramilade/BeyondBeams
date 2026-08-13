@@ -33,6 +33,20 @@ Success envelope:
 
 Errors contain `{ "success": false, "error": { "code": "...", "message": "..." } }`. Internal exception details are not returned.
 
+## Case workflow API
+
+The dashboard uses opaque same-origin sessions supplied by a configured identity-provider adapter. `GET /auth/login` begins Authorization Code + PKCE with one-time state and nonce; `GET /auth/callback` consumes the callback, validates the provider result, and creates an `HttpOnly`, `SameSite=Lax` session cookie. `GET /auth/csrf` issues a session-bound synchronizer token. `POST /auth/session/refresh` rotates the session and invalidates its predecessor. `POST /auth/logout` revokes the local session and clears the cookie. Authentication responses are non-cacheable.
+
+Every cookie-authenticated mutation requires an exact same-origin `Origin` and `X-CSRF-Token`. Missing or invalid origin/token values fail with 403. Bearer-authenticated machine API calls do not require CSRF. These routes are provider-neutral runtime boundaries; no production identity or durable session provider is selected. The legacy `OIDC_LOGIN_URL` redirect remains a broker compatibility path and does not by itself enable callback/session routes.
+
+`POST /api/cases` requires `case:create` and accepts `actionType`, a validated `payload`, and `inputMethod` (`guided` or explicitly selected `json`). JSON is payload input only; the server performs identity, scope, policy, authorization issuance, case-state, and audit checks.
+
+`GET /api/cases` requires `case:read`, returns only the caller tenant's records, and accepts exact `state`, `assignedTo`, `requesterId`, `priority`, `overdue`, `query`, and `order` filters. `GET /api/cases/:caseId` returns tenant-scoped case detail. `POST /api/cases/:caseId/transition` requires `case:review`; transitions are explicit and reject self-review and assignment conflicts. Decision, notice, correction, objection, appeal, remedy, and override transitions require a structured `record` with an uppercase `reasonCode` and explanation; override records also require `expiresAt`.
+
+Additional authenticated operations are `POST /api/cases/:caseId/assign`, `/schedule`, `/escalate`, `/notes`, and `/evidence`. They support reasoned assignments, future deadlines and priorities, escalation, role-controlled notes, and evidence metadata with a SHA-256 digest and scan status. Evidence registration does not upload binaries: immutable storage, malware scanning, records disposition, notifications, and provider delivery receipts remain production integration boundaries.
+
+No public APIs instantiate synthetic providers. Tests inject them into the provider-neutral authentication routes; they must not be used as runtime integrations or fallbacks.
+
 ## Payload fields
 
 - Breach: `breachId`, `affectedRecords`, `dataFlow`
@@ -43,9 +57,9 @@ Errors contain `{ "success": false, "error": { "code": "...", "message": "..." }
 
 Runtime validation enforces required fields, primitive types, enumerations, maximum lengths, and rejects unknown fields. The JSON body limit defaults to 32 KB.
 
-## `GET /`
+## Browser pages
 
-Returns the public dashboard file. Static assets, the manifest, and service worker are deliberately outside API authentication so ordinary browser navigation and PWA installation work.
+The public landing page is `GET /`; `GET /sign-in` explains provider-backed access without implementing local password registration. `GET /agents` presents the five implemented domain-agent prototypes, while `GET /agents/:agentId` presents each agent's evidence-based profile and a schema-guided prompt interaction. Agent interaction creates a governed case through `POST /api/cases`; it is not a public chat endpoint and does not bypass session, CSRF, scope, policy, authorization issuance, or human-review controls. The browser shell also serves `/dashboard`, `/cases/new`, `/cases/:caseId`, `/review`, and `/admin/audit`. Protected page data remains behind the authenticated APIs—the HTML shell itself is public so ordinary navigation, loading/error states, and PWA installation work. Static assets, the manifest, and service worker are also deliberately outside API authentication.
 
 ## Audit and operations endpoints
 
