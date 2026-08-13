@@ -4,9 +4,9 @@
 
 **Overall status:** Development only; not approved for production or real personal data
 
-**Last reviewed:** 2026-08-12
+**Last reviewed:** 2026-08-13
 
-**Integration branch:** `main`
+**Working branch:** `feature/global-public-sector-pwa`
 
 ## Completed
 
@@ -22,6 +22,13 @@
 - Added provider-neutral file queue and metrics reference adapters with idempotency, leases, retries, dead letters, dependency readiness, and protected metrics export.
 - Added semantic localized PWA development controls, offline/manual-service boundary messaging, policy self-approval denial, and deterministic accessibility regression checks.
 - Added release evidence automation for packaged artifacts, retained SBOM/audit/checksum/metadata, and GitHub provenance attestations; institutional release approval and vulnerability disposition remain external gates.
+- Added a tenant-scoped atomic case workflow adapter, explicit draft/submission/review/decision/remedy/closure transitions, separation-of-duties and assignment conflict checks, same-origin session authentication support, server-side authorization issuance boundary, and guided-form/explicit-JSON case workspace regression coverage. The persistence and identity adapters remain development/reference implementations.
+- Extended the development case adapter and API with tenant-scoped detail and queue filters, assignment history, deadlines, priorities, escalation, notes, evidence metadata, suspend/resume/cancel states, and reasoned decision/notice/correction/objection/appeal/remedy/override records. Provider-backed documents, scanning, notifications, and records remain open.
+- Defined executable provider-neutral contracts and in-memory synthetic test doubles for OIDC/session/CSRF/logout/revocation, managed signing, transaction/outbox, queues/workers, immutable-record metadata and scanning, retention/legal hold, notification receipts, document structure, policy publication/revocation, telemetry/clock/alerts, migration, and backup/restore. These are not runtime or production integrations; all external handshakes and assurance gates remain open.
+- Wired the provider-neutral identity/session contract to Express login, callback, CSRF, rotation and logout routes; enforced exact-origin CSRF on cookie-authenticated mutations; integrated the browser CSRF/sign-out journey; and added lifecycle and security-negative HTTP tests. No real identity or durable session provider is selected.
+- Added a tracked repository-readiness checklist separating source-complete controls from provider, deployment and institutional evidence.
+- Split the browser experience into a public product landing page, institutional sign-in/access page, tenant dashboard, new-case form, case detail, review queue, and audit administration views using the existing plain JavaScript and Express shell. Protected data remains API-authorized, and sign-up is explicitly provider-managed rather than simulated locally.
+- Added a public five-agent intelligence directory and dedicated profile/workspace route for every implemented domain agent, covering actual outputs, abilities, benefits, use cases, intentions, visions, and strengths. Schema-guided prompts submit through the existing authenticated case, policy, authorization, audit, and human-review boundary; no conversational model or unauthenticated execution is represented.
 
 ## Two-phase path to live service
 
@@ -29,7 +36,7 @@ All remaining development and deployment work is structured in [Production Readi
 
 | Phase | Purpose | Current state | Exit status |
 |---|---|---|---|
-| Phase 1: Production Ready | Complete the product, governed workflows, production service adapters, security, responsive and accessible UX, resilience, operations, and release evidence | Not complete; prototype controls and reference adapters only | `PRODUCTION_READY_CANDIDATE — synthetic/staging use only` |
+| Phase 1: Production Ready | Complete the product, governed workflows, production service adapters, security, responsive and accessible UX, resilience, operations, and release evidence | Not complete; governed case core implemented, but production adapters and independent assurance remain open | `PRODUCTION_READY_CANDIDATE — synthetic/staging use only` |
 | Phase 2: Move to Live | Configure and independently assess one named institutional deployment, commission its infrastructure and service channels, exercise operations, accept residual risk, and authorize a controlled launch | Not started; institution and jurisdiction are unresolved | `LIVE` only for the exact approved artifact, configuration, institution, jurisdiction, purposes, and operating boundary |
 
 ### Phase 1 summary
@@ -52,9 +59,9 @@ Passing Phase 1 does not imply Phase 2 approval. Missing or expired Phase 2 evid
 
 ## Known risks
 
-The development receipt signer remains process-bound; local persistence is single-host; policy packs are synthetic and publication is configuration-driven; compliance outcomes remain simulated; accessible PWA controls have not been independently assessed; consequential review/appeal workflows are not implemented; selective disclosure, production custody, centralized observability, approved SLO/RTO/RPO, and independent assessments remain open.
+The development receipt signer and case issuer remain process-bound; local persistence is single-host; browser identity/session routes require a selected real adapter and durable distributed state; policy packs are synthetic and publication is configuration-driven; compliance outcomes remain simulated; accessible PWA controls and the new workflow have not been independently assessed. Actual file upload/scanning, provider notifications/documents, production database/outbox/queue/KMS/immutable storage, selective disclosure, centralized observability/clock/on-call, approved SLO/RTO/RPO, restore/failure evidence, and independent assessments remain open.
 
-The production-assurance register records additional unresolved dependencies: no jurisdiction or approved policy pack, no independent security/privacy/legal/accessibility/operations assessments, no named institutional risk acceptor, no approved SLO/RTO/RPO, and no exercised shutdown/decommissioning procedure. The supported conclusion remains **NOT_READY — development/synthetic evaluation only**.
+The production-assurance register records additional unresolved dependencies: no jurisdiction or approved policy pack, no independent security/privacy/legal/accessibility/operations assessments, no named institutional risk acceptor, no approved SLO/RTO/RPO, and no exercised shutdown/decommissioning procedure. [Production Gap Audit](docs/PRODUCTION_GAP_AUDIT.md) separates omitted workflow capabilities, required provider handshakes, and institution-owned production work. The supported conclusion remains **NOT_READY — development/synthetic evaluation only**.
 
 ## Next recommended action
 
@@ -69,3 +76,10 @@ Execute Phase 1 of [Production Readiness and Live-Service Roadmap](PRODUCTION_RO
 | 2026-08-12 | Added signed policy authorization, reference queue/metrics adapters, and production architecture/runbook boundaries; status remains NOT_READY |
 | 2026-08-12 | Added accessibility/service-inclusion engineering baseline, policy self-approval denial, and release evidence automation; status remains NOT_READY |
 | 2026-08-12 | Structured all remaining work into Production Ready and Move to Live phases, including responsive acceptance across mobile, tablet, desktop, and widescreen; status remains NOT_READY |
+| 2026-08-12 | Audited workflow omissions, production integration handshakes, and full-development requirements against the two-phase roadmap; status remains NOT_READY |
+| 2026-08-13 | Extended the synthetic case workflow with queue, assignment, deadline, escalation, note, evidence-metadata, suspension, cancellation, and reasoned-record controls; provider integrations and readiness remain open |
+| 2026-08-13 | Added executable provider contracts and synthetic lifecycle/failure tests across all requested integration boundaries; no real provider, institution, or assurance gate was closed and status remains NOT_READY |
+| 2026-08-13 | Wired provider-neutral browser identity/session routes, exact-origin CSRF, rotation and logout; added repository-readiness tracking and reproducible verification; status remains NOT_READY |
+| 2026-08-13 | Added the seven-view public, requester, reviewer, and audit browser structure with responsive and explicit unauthorized/empty/error boundaries; status remains NOT_READY |
+| 2026-08-13 | Added public directory and dedicated governed interaction pages for all five implemented domain agents; outputs remain simulated and status remains NOT_READY |
+| 2026-08-13 | Added a loopback-only `npm start` development host with ephemeral in-memory keys, ignored local state, and fail-closed unauthenticated protected routes; production status remains NOT_READY |
