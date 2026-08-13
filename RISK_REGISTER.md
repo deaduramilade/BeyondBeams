@@ -21,6 +21,7 @@ This register is intentionally incomplete. It must be completed, reviewed, and a
 | R-009 | Signed policy engine uses only synthetic packs; no jurisdictional mapping has independent validation | Critical | To assign | Institution-approved pack, qualified independent validation, findings/retest | `POLICY_PACKS.md`, ADR-0006 | Unresolved | Unresolved | Named legal/rights authority | Open |
 | R-010 | File persistence and in-process metrics are single-host reference adapters | High | To assign | Regional database/queue/object/telemetry services, restore/load/alert evidence | `PERSISTENCE.md`, `OBSERVABILITY.md` | Unresolved | Unresolved | Named service/operations authority | Open |
 | R-011 | No independently assessed accessible deployment, institutional manual service path, or governed review/appeal workflow | Critical | To assign | Complete qualified assessment and approved accessible review/remedy service design | `ACCESSIBILITY.md`, `CONSEQUENTIAL_ACTIONS.md` | Unresolved | Unresolved | Named accessibility/service/rights authority | Open |
+| R-012 | Provider-neutral synthetic contracts may be mistaken for completed production integrations | Critical | To assign | Keep synthetic providers disconnected from runtime; require selected-provider contract and staging evidence plus named approval | ADR-0009, `docs/PRODUCTION_GAP_AUDIT.md` | Unresolved | Unresolved | Named service/security authority | Open |
 
 ## Acceptance record
 
