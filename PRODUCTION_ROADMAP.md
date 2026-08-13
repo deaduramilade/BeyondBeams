@@ -4,6 +4,10 @@
 
 **Rule:** Phase 2 cannot begin its live-service acceptance gate until the Phase 1 exit gate is complete. Completion of Phase 1 means the product is technically ready to be evaluated for a named deployment. It does not authorize real personal data, consequential decisions, or public use.
 
+The omission and integration audit for this roadmap is maintained in [Production Gap Audit](docs/PRODUCTION_GAP_AUDIT.md). It distinguishes incomplete product workflows from provider handshakes and institution-owned live-service approvals.
+
+Provider-neutral contracts and local synthetic test doubles now define the minimum lifecycle for identity/session, signing, persistence/outbox, queues, records/scanning, notifications, documents, policy, and telemetry. This completes contract definition only. Phase 1 still requires runtime integration with selected production-class staging providers and all exit evidence below.
+
 ## Phase 1: Production Ready
 
 ### Objective
