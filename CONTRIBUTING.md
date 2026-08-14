@@ -1,4 +1,4 @@
-# Contributing to Oblivion-AI
+# Contributing to BeyondBeams
 
 ## Branch and pull-request workflow
 
