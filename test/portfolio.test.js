@@ -64,6 +64,7 @@ test('portfolio exposes accessible responsive presentation controls', () => {
 });
 
 test('Vercel configuration deploys only the generated static artifact without catch-all rewrites', () => {
+  assert.equal(vercel.framework, null, 'null selects Vercel Other and prevents Express framework detection');
   assert.equal(vercel.buildCommand, 'npm run build:portfolio');
   assert.equal(vercel.outputDirectory, 'dist/portfolio');
   assert.equal(vercel.cleanUrls, false);

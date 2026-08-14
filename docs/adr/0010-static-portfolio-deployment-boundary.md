@@ -14,7 +14,7 @@ BeyondBeams needs a publicly viewable portfolio presentation on a static Vercel 
 
 Create a separate `portfolio/` source artifact and generate `dist/portfolio/` for Vercel. The artifact is frontend-only, read-only, and uses invented presentation records. It contains no authentication control, form submission, credential entry, service worker, backend request, API client, function, or catch-all rewrite. Protected workflows are represented by explicitly labelled static views with disabled illustrative controls.
 
-`vercel.json` deploys only `dist/portfolio`, applies restrictive response headers, and defines no rewrite. As a result, absent `/api/*`, `/auth/*`, `/audit/*`, and `/execute` resources remain unmatched static paths rather than resolving to portfolio HTML. The Express dashboard and server are not copied into the artifact and their existing authentication and authorization behavior is unchanged.
+`vercel.json` explicitly sets `framework` to `null` (Vercel's `Other` preset), deploys only `dist/portfolio`, applies restrictive response headers, and defines no rewrite. The framework override prevents the repository's Express metadata from being interpreted as a runtime for this deployment. As a result, absent `/api/*`, `/auth/*`, `/audit/*`, and `/execute` resources remain unmatched static paths rather than resolving to portfolio HTML. The Express dashboard and server are not copied into the artifact and their existing authentication and authorization behavior is unchanged.
 
 ## Alternatives considered
 
