@@ -2,7 +2,7 @@
 
 ## Position
 
-Oblivion-AI is designed to support jurisdiction-specific public-sector controls, but design intent is not compliance. No independent audit, certification, legal opinion, control test, production evidence, or governmental approval is recorded in this repository. Prototype agent outputs are simulated and are not legal determinations.
+BeyondBeams is designed to support jurisdiction-specific public-sector controls, but design intent is not compliance. No independent audit, certification, legal opinion, control test, production evidence, or governmental approval is recorded in this repository. Prototype agent outputs are simulated and are not legal determinations.
 
 ## Framework workstream
 
