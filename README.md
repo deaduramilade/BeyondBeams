@@ -14,6 +14,7 @@ BeyondBeams is an early-stage sovereign AI authorization and accountability fabr
 | `src/policy/` | Signed policy-pack verification and authorization decisions |
 | `src/audit/`, `src/persistence/`, `src/operations/` | Development audit, queue, and metrics adapters |
 | `dashboard/` | Responsive browser/PWA client with localized accessible development controls |
+| `portfolio/` | Isolated frontend-only source for the read-only Vercel portfolio artifact |
 | `BeyondBeams_1_0_0_2/` | Unmanaged Copilot Studio solution export |
 | `docs/adr/` | Architecture decision records |
 
@@ -27,6 +28,20 @@ npm start
 ```
 
 The development-only launcher generates ephemeral keys in memory, writes non-key state under ignored `runtime-data/`, binds only to loopback, and leaves protected workflows unavailable until a real identity provider is configured. The default URL is `http://127.0.0.1:3000`.
+
+## Read-only portfolio build
+
+The repository also contains a separate frontend-only portfolio presentation for static Vercel hosting. It does not include the Express server, make backend requests, authenticate users, accept data, execute agents, or claim that protected workflows are operational.
+
+```bash
+npm run build:portfolio
+npm run preview:portfolio
+npm run validate:portfolio:browser
+```
+
+The generated artifact is written to ignored `dist/portfolio/`. The preview binds to loopback and serves only that artifact. Browser validation uses an installed Microsoft Edge, Google Chrome, or Chromium (or `PORTFOLIO_BROWSER_PATH`) to exercise explicit routes, responsive layouts, keyboard controls, accessibility structure, local-only network behavior, and absent backend namespaces; screenshots and a machine-readable report are written to ignored `artifacts/portfolio-browser/`.
+
+`vercel.json` deploys only `dist/portfolio/` and intentionally defines no SPA catch-all rewrite, so absent `/api/*`, `/auth/*`, `/audit/*`, and `/execute` paths are not masked by portfolio HTML. This static presentation does not change or replace the normal Express-hosted application. See [ADR-0010](docs/adr/0010-static-portfolio-deployment-boundary.md).
 
 For configured integration testing, inject OIDC/JWKS identity, A2SPA-R issuer public keys, signed policy packs, ignored local replay/audit directories, and a development receipt signer, then run `node server.js`. See [Configuration](CONFIGURATION.md).
 

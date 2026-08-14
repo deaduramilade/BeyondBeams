@@ -7,6 +7,7 @@ BeyondBeams is a single-process Node.js authorization/execution prototype with a
 | Component | Responsibility | Trust |
 |---|---|---|
 | Dashboard/PWA | Localized accessible development input, connectivity/manual-service boundary, and receipt display | Untrusted client |
+| Static portfolio | Generated frontend-only, read-only presentation with invented sample records and no application transport | Public presentation outside the application security boundary |
 | Express API | OIDC identity, A2SPA-R verification, policy decision, validation, receipt, audit, and HTTP translation | Security boundary |
 | `BeyondBeams` | Prefix-based dispatch | Internal router |
 | Policy registry | Verify and evaluate signed institution/jurisdiction packs | Security boundary |
@@ -23,6 +24,8 @@ BeyondBeams is a single-process Node.js authorization/execution prototype with a
 3. Express validates identity/scope, envelope signature and binding, active signed policy, and atomic nonce consumption.
 4. A permitted decision is audited before execution; the agent returns a simulated result.
 5. The executor signs a linked A2SPA-R receipt and appends its digest to the audit ledger.
+
+The Vercel portfolio is not part of this request flow. Its build copies an explicit static-file allowlist into `dist/portfolio`, defines no function or catch-all rewrite, and cannot call the Express, authentication, authorization, case, execution, or audit surfaces. See ADR-0010.
 
 For ordinary browser users, Express exposes a provider-neutral Authorization Code + PKCE login/callback boundary with one-time state/nonce, opaque `HttpOnly` sessions, rotation, exact-origin CSRF enforcement, logout and local revocation. The browser retrieves a session-bound CSRF token and never receives or enters an A2SPA-R envelope. Case submission accepts a validated action payload; the server evaluates policy and obtains the envelope through a separate authorization-issuer adapter. Guided and explicitly selected JSON payload input share the same validator. Reviewer transitions require verified role claims, tenant scope, and separation-of-duties checks. Tests inject the synthetic identity provider; no real identity, token exchange or durable distributed session adapter is selected.
 
