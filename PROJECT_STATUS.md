@@ -4,7 +4,7 @@
 
 **Overall status:** Development only; not approved for production or real personal data
 
-**Last reviewed:** 2026-08-13
+**Last reviewed:** 2026-08-14
 
 **Working branch:** `feature/global-public-sector-pwa`
 
@@ -27,6 +27,8 @@
 - Defined executable provider-neutral contracts and in-memory synthetic test doubles for OIDC/session/CSRF/logout/revocation, managed signing, transaction/outbox, queues/workers, immutable-record metadata and scanning, retention/legal hold, notification receipts, document structure, policy publication/revocation, telemetry/clock/alerts, migration, and backup/restore. These are not runtime or production integrations; all external handshakes and assurance gates remain open.
 - Wired the provider-neutral identity/session contract to Express login, callback, CSRF, rotation and logout routes; enforced exact-origin CSRF on cookie-authenticated mutations; integrated the browser CSRF/sign-out journey; and added lifecycle and security-negative HTTP tests. No real identity or durable session provider is selected.
 - Added a tracked repository-readiness checklist separating source-complete controls from provider, deployment and institutional evidence.
+- Added public project-level privacy, cookie, and terms baselines, a legal publication checklist, application routes, and footer navigation. These are not legal advice or production terms; operator identity, governing jurisdiction, deployment facts, and qualified legal approval remain open.
+- Renamed the active project and assistant identity to BeyondBeams and introduced a gold-and-black segmented techno-stencil wordmark plus a compact BB mark for the application header and footer.
 - Split the browser experience into a public product landing page, institutional sign-in/access page, tenant dashboard, new-case form, case detail, review queue, and audit administration views using the existing plain JavaScript and Express shell. Protected data remains API-authorized, and sign-up is explicitly provider-managed rather than simulated locally.
 - Added a public five-agent intelligence directory and dedicated profile/workspace route for every implemented domain agent, covering actual outputs, abilities, benefits, use cases, intentions, visions, and strengths. Schema-guided prompts submit through the existing authenticated case, policy, authorization, audit, and human-review boundary; no conversational model or unauthenticated execution is represented.
 
@@ -83,3 +85,5 @@ Execute Phase 1 of [Production Readiness and Live-Service Roadmap](PRODUCTION_RO
 | 2026-08-13 | Added the seven-view public, requester, reviewer, and audit browser structure with responsive and explicit unauthorized/empty/error boundaries; status remains NOT_READY |
 | 2026-08-13 | Added public directory and dedicated governed interaction pages for all five implemented domain agents; outputs remain simulated and status remains NOT_READY |
 | 2026-08-13 | Added a loopback-only `npm start` development host with ephemeral in-memory keys, ignored local state, and fail-closed unauthenticated protected routes; production status remains NOT_READY |
+| 2026-08-14 | Published project-level privacy, cookie, and terms baselines in the application, added legal footer navigation, and recorded the operator/counsel publication gate; status remains NOT_READY |
+| 2026-08-14 | Renamed the maintained project and assistant identity to BeyondBeams and added matching beam-line wordmark and EB header/footer assets; status remains NOT_READY |
