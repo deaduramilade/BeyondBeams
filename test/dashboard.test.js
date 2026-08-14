@@ -9,6 +9,8 @@ const dashboard = path.join(__dirname, '..', 'dashboard');
 const html = fs.readFileSync(path.join(dashboard, 'index.html'), 'utf8');
 const css = fs.readFileSync(path.join(dashboard, 'style.css'), 'utf8');
 const script = fs.readFileSync(path.join(dashboard, 'app.js'), 'utf8');
+const wordmark = fs.readFileSync(path.join(dashboard, 'logo.svg'), 'utf8');
+const favicon = fs.readFileSync(path.join(dashboard, 'favicon.svg'), 'utf8');
 
 test('dashboard exposes semantic accessibility and service-inclusion controls', () => {
   assert.match(html, /class="skip-link"/);
@@ -33,11 +35,39 @@ test('dashboard uses session APIs, reports connectivity, and does not persist cr
 });
 
 test('browser shell defines the complete governed page structure', () => {
-  for (const route of ['/', '/sign-in', '/agents', '/dashboard', '/cases/new', '/review', '/admin/audit']) assert.match(script, new RegExp(route.replaceAll('/', '\\/')));
+  for (const route of ['/', '/sign-in', '/agents', '/dashboard', '/cases/new', '/review', '/admin/audit', '/legal/privacy', '/legal/cookies', '/legal/terms']) assert.match(script, new RegExp(route.replaceAll('/', '\\/')));
   assert.match(script, /\/cases\\\/\(\[\^\/\]\+\)/);
   assert.match(script, /does not store passwords or offer public self-registration/);
   assert.match(script, /Audit & integrity/);
   assert.match(script, /Review queue/);
+});
+
+test('public shell publishes legal notices and complete footer navigation', () => {
+  for (const route of ['/legal/privacy', '/legal/cookies', '/legal/terms']) assert.match(html, new RegExp(`href="${route.replaceAll('/', '\\/')}"`));
+  assert.match(html, /aria-label="Footer navigation"/);
+  assert.match(script, /function renderLegal\(kind\)/);
+  assert.match(script, /Public pages do not set analytics, advertising, preference, or social-media cookies/);
+  assert.match(script, /No company legal name, registered address, operating jurisdiction/);
+  assert.match(css, /fonts\.googleapis\.com.*Michroma/);
+  assert.match(css, /family=Inter/);
+});
+
+test('brand uses the BeyondBeams logo and favicon in the header and footer', () => {
+  assert.equal((html.match(/src="\/favicon\.svg"/g) || []).length, 2);
+  assert.equal((html.match(/src="\/logo\.svg"/g) || []).length, 2);
+  assert.match(html, /aria-label="BeyondBeams home"/);
+  assert.match(html, /class="brand-wordmark" src="\/logo\.svg" alt="BeyondBeams"/);
+  assert.match(css, /\.brand-mark/);
+  assert.match(css, /\.brand-wordmark/);
+  assert.doesNotMatch(html, /class="brand-(?:orbit|core|ai)"/);
+});
+
+test('landing page presents the full BeyondBeams wordmark in the first viewport', () => {
+  assert.match(script, /class="hero-wordmark" src="\/beyondbeams-wordmark\.svg"/);
+  assert.match(css, /\.hero-wordmark\{[^}]*width:min\(100%,620px\)/);
+  assert.match(wordmark, /mask id="stencil"/);
+  assert.match(wordmark, /BEYONDBEAMS/);
+  assert.match(favicon, /segmented techno-stencil/);
 });
 
 test('agent directory exposes all implemented agents and governed prompt interaction', () => {
