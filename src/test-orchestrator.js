@@ -1,5 +1,5 @@
 // src/test-orchestrator.js
-const oblivionAI = require('./OblivionAI');
+const beyondBeams = require('./BeyondBeams');
 
 async function testOrchestrator() {
   const breachPayload = { 
@@ -9,7 +9,7 @@ async function testOrchestrator() {
   };
 
   try {
-    const result = await oblivionAI.execute("realtime.defense.breach.detect", breachPayload);
+    const result = await beyondBeams.execute("realtime.defense.breach.detect", breachPayload);
     console.log('\n🎉 Orchestrator executed successfully through A2SPA:');
     console.log(result);
   } catch (err) {
