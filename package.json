@@ -5,11 +5,14 @@
   "main": "server.js",
   "scripts": {
     "start": "node src/local-server.js",
+    "build:portfolio": "node scripts/build-portfolio.js",
+    "preview:portfolio": "node scripts/serve-portfolio.js",
+    "validate:portfolio:browser": "node scripts/validate-portfolio-browser.js",
     "test": "node --test test/*.test.js",
-    "check": "node --check server.js && node --check dashboard/app.js && node --check dashboard/service-worker.js && node --check src/BeyondBeams.js && node --check src/actions.js && node --check src/local-server.js && node --check src/a2spa-crypto/A2SPA.js && node --check src/a2spa-r/receipt.js && node --check src/a2spa-r/replay.js && node --check src/audit/ledger.js && node --check src/cases/store.js && node --check src/integrations/contracts.js && node --check src/integrations/synthetic-platform.js && node --check src/security/authorization-issuer.js && node --check src/security/oidc.js && node --check src/security/managed-signer.js && node --check src/policy/policy-pack.js && node --check src/persistence/work-queue.js && node --check src/operations/metrics.js",
+    "check": "node --check server.js && node --check dashboard/app.js && node --check dashboard/service-worker.js && node --check portfolio/assets/portfolio.js && node --check scripts/build-portfolio.js && node --check scripts/serve-portfolio.js && node --check scripts/validate-portfolio-browser.js && node --check src/BeyondBeams.js && node --check src/actions.js && node --check src/local-server.js && node --check src/a2spa-crypto/A2SPA.js && node --check src/a2spa-r/receipt.js && node --check src/a2spa-r/replay.js && node --check src/audit/ledger.js && node --check src/cases/store.js && node --check src/integrations/contracts.js && node --check src/integrations/synthetic-platform.js && node --check src/security/authorization-issuer.js && node --check src/security/oidc.js && node --check src/security/managed-signer.js && node --check src/policy/policy-pack.js && node --check src/persistence/work-queue.js && node --check src/operations/metrics.js",
     "validate:json": "node -e \"const fs=require('fs'),path=require('path');function walk(p){for(const e of fs.readdirSync(p,{withFileTypes:true})){if(['.git','node_modules'].includes(e.name))continue;const f=path.join(p,e.name);if(e.isDirectory())walk(f);else if(e.name.endsWith('.json')||e.name.endsWith('.webmanifest'))JSON.parse(fs.readFileSync(f,'utf8'));}}walk('.')\"",
     "scan:secrets": "node scripts/scan-secrets.js",
-    "verify": "npm run check && npm run validate:json && npm test && npm audit --audit-level=low && npm run scan:secrets"
+    "verify": "npm run check && npm run validate:json && npm test && npm run validate:portfolio:browser && npm audit --audit-level=low && npm run scan:secrets"
   },
   "keywords": [],
   "author": "",

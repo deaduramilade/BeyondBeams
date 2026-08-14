@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a0b09">
+  <meta name="description" content="A read-only portfolio presentation of the BeyondBeams authorization and accountability prototype.">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/portfolio.css">
+  <title>BeyondBeams — Portfolio Demonstration</title>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <div class="demo-bar" role="note">
+    <span><i aria-hidden="true"></i> Read-only portfolio demonstration</span>
+    <span>No live service · No sign-in · No data submission</span>
+  </div>
+
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="BeyondBeams portfolio home">
+      <img src="/assets/favicon.svg" alt="" width="42" height="42">
+      <img class="wordmark" src="/assets/logo.png" alt="BeyondBeams" width="256" height="40">
+    </a>
+    <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+    <nav id="site-nav" class="site-nav" aria-label="Portfolio navigation">
+      <a href="#system">System</a>
+      <a href="#agents">Agents</a>
+      <a href="#workflows">Workflows</a>
+      <a href="#assurance">Boundary</a>
+    </nav>
+    <a class="source-link" href="https://github.com/deaduramilade/BeyondBeams" rel="noopener noreferrer" target="_blank">View source <span aria-hidden="true">↗</span></a>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-rail" aria-hidden="true"><span>BB / A2SPA-R</span><span>PORTFOLIO / 2026</span></div>
+      <div class="hero-copy">
+        <p class="kicker"><span class="signal-dot" aria-hidden="true"></span>Authorization before automation</p>
+        <h1 id="hero-title">AI should not outrun <em>institutional responsibility.</em></h1>
+        <p class="hero-summary">BeyondBeams explores how public institutions could authorize consequential AI-assisted actions, preserve human review, and return linked evidence of what happened.</p>
+        <div class="hero-actions">
+          <a class="button signal" href="#system">Explore the system</a>
+          <a class="button ghost" href="#workflows">View read-only workflows</a>
+        </div>
+        <p class="hero-note">Prototype source presented as a static portfolio artifact. It cannot authenticate users, execute agents, create cases, or access an API.</p>
+      </div>
+
+      <aside class="control-card" aria-label="Illustrative governance sequence">
+        <div class="control-head"><span>Illustrative control chain</span><span>05 gates</span></div>
+        <ol>
+          <li class="complete"><span>01</span><div><strong>Identity</strong><small>Actor and tenant bound</small></div><i aria-hidden="true"></i></li>
+          <li class="complete"><span>02</span><div><strong>Policy</strong><small>Purpose and scope checked</small></div><i aria-hidden="true"></i></li>
+          <li class="active"><span>03</span><div><strong>Authorization</strong><small>Signed action envelope</small></div><i aria-hidden="true"></i></li>
+          <li><span>04</span><div><strong>Human review</strong><small>Authority remains visible</small></div><i aria-hidden="true"></i></li>
+          <li><span>05</span><div><strong>Receipt</strong><small>Linked evidence returned</small></div><i aria-hidden="true"></i></li>
+        </ol>
+        <div class="control-foot"><span>Conceptual sequence</span><span>Not a live transaction</span></div>
+      </aside>
+    </section>
+
+    <section class="status-strip" aria-label="Project status">
+      <p>Pre-production prototype</p>
+      <ul>
+        <li><span>Mode</span>Read-only</li>
+        <li><span>Data</span>None collected</li>
+        <li><span>Runtime</span>Static frontend</li>
+        <li><span>Readiness</span>NOT_READY</li>
+      </ul>
+    </section>
+
+    <section id="system" class="system-section section-shell anchored-section" aria-labelledby="system-title">
+      <header class="section-heading">
+        <div><p class="eyebrow">System / 01</p><h2 id="system-title">A visible chain of <em>accountability.</em></h2></div>
+        <p>The prototype separates the untrusted browser, identity, policy, authorization, execution, and evidence boundaries. The portfolio version explains that architecture without connecting to any of them.</p>
+      </header>
+
+      <div class="architecture-map" aria-label="Conceptual BeyondBeams architecture">
+        <article class="architecture-origin"><span>01</span><p>Untrusted client</p><h3>Institutional intent enters the boundary.</h3><small>Structured request · Synthetic evaluation data only</small></article>
+        <div class="beam-path" aria-hidden="true"><i></i><i></i><i></i></div>
+        <ol>
+          <li><span>02</span><div><p>Identity</p><strong>Who is acting?</strong><small>OIDC · tenant · workload · role</small></div></li>
+          <li><span>03</span><div><p>Policy</p><strong>May this action proceed?</strong><small>Purpose · prohibition · approval</small></div></li>
+          <li><span>04</span><div><p>A2SPA-R</p><strong>What exactly was authorized?</strong><small>Signature · binding · freshness · replay</small></div></li>
+          <li><span>05</span><div><p>Human authority</p><strong>Who reviews the outcome?</strong><small>Separation of duties · remedy</small></div></li>
+          <li><span>06</span><div><p>Evidence</p><strong>What can be verified later?</strong><small>Receipt · audit digest · case history</small></div></li>
+        </ol>
+      </div>
+
+      <div class="principles-grid">
+        <article><span class="principle-number">01</span><div><p class="eyebrow">Authorize</p><h3>Exact actions, not ambient trust.</h3><p>A proposed envelope binds actor, tenant, workload, action, payload, context, policy, audience, and time.</p></div></article>
+        <article><span class="principle-number">02</span><div><p class="eyebrow">Review</p><h3>Human authority stays legible.</h3><p>Policy approval, reviewer roles, conflicts, decisions, notices, objections, appeals, and remedies remain explicit.</p></div></article>
+        <article><span class="principle-number">03</span><div><p class="eyebrow">Evidence</p><h3>Consequential steps leave a trace.</h3><p>Linked receipts and a tenant-scoped audit history are designed to make later verification possible.</p></div></article>
+      </div>
+    </section>
+
+    <section id="agents" class="agents-section anchored-section" aria-labelledby="agents-title">
+      <div class="section-shell">
+        <header class="section-heading inverse">
+          <div><p class="eyebrow">Agents / 02</p><h2 id="agents-title">Five narrow prototypes.<br><em>One governed boundary.</em></h2></div>
+          <p>Each domain agent has an exact action contract and returns only simulated recommendations or statuses. None is represented as an autonomous institutional decision-maker.</p>
+        </header>
+
+        <div class="agent-grid">
+          <article class="agent-card agent-wide">
+            <div class="agent-top"><span>RTD-01</span><span>Threat containment</span></div>
+            <div class="agent-orbit" aria-hidden="true"><i></i><b>01</b></div>
+            <div><h3>Real-Time Defense</h3><p>Frames a suspected breach as an attributable, reviewable response record.</p><ul><li>Breach intake</li><li>Response status</li><li>Case timeline</li></ul></div>
+          </article>
+          <article class="agent-card">
+            <div class="agent-top"><span>CMP-02</span><span>Impact assessment</span></div>
+            <div class="agent-orbit" aria-hidden="true"><i></i><b>02</b></div>
+            <div><h3>Compliance Automation</h3><p>Initiates a consistent, human-reviewed impact assessment.</p><ul><li>DPIA frame</li><li>Risk class</li></ul></div>
+          </article>
+          <article class="agent-card">
+            <div class="agent-top"><span>PAN-03</span><span>Risk intelligence</span></div>
+            <div class="agent-orbit" aria-hidden="true"><i></i><b>03</b></div>
+            <div><h3>Predictive Analytics</h3><p>Surfaces a simulated risk signal and practical safeguards.</p><ul><li>Risk hypothesis</li><li>Safeguards</li></ul></div>
+          </article>
+          <article class="agent-card">
+            <div class="agent-top"><span>REG-04</span><span>Control review</span></div>
+            <div class="agent-orbit" aria-hidden="true"><i></i><b>04</b></div>
+            <div><h3>Regulatory Oversight</h3><p>Structures an oversight request around a defined controller.</p><ul><li>Control scope</li><li>Review status</li></ul></div>
+          </article>
+          <article class="agent-card agent-wide">
+            <div class="agent-top"><span>RGT-05</span><span>Rights &amp; remedy</span></div>
+            <div class="agent-orbit" aria-hidden="true"><i></i><b>05</b></div>
+            <div><h3>Rights Management</h3><p>Routes a rights request toward review, notice, objection, appeal, and remedy records.</p><ul><li>Rights intake</li><li>Human review</li><li>Remedy trail</li></ul></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflows" class="workflows-section section-shell anchored-section" aria-labelledby="workflows-title">
+      <header class="section-heading">
+        <div><p class="eyebrow">Workflows / 03</p><h2 id="workflows-title">Protected screens,<br><em>honestly presented.</em></h2></div>
+        <p>The Express-hosted application contains authenticated requester, reviewer, and audit workflows. Here they are deliberately replaced with static, non-interactive product views.</p>
+      </header>
+
+      <div class="view-tabs" role="tablist" aria-label="Choose a portfolio workflow view">
+        <button id="workflow-tab-dashboard" type="button" role="tab" aria-selected="true" aria-controls="workflow-stage" tabindex="0" data-view="dashboard">Dashboard</button>
+        <button id="workflow-tab-request" type="button" role="tab" aria-selected="false" aria-controls="workflow-stage" tabindex="-1" data-view="request">New case</button>
+        <button id="workflow-tab-review" type="button" role="tab" aria-selected="false" aria-controls="workflow-stage" tabindex="-1" data-view="review">Review queue</button>
+        <button id="workflow-tab-audit" type="button" role="tab" aria-selected="false" aria-controls="workflow-stage" tabindex="-1" data-view="audit">Audit</button>
+      </div>
+
+      <div id="workflow-stage" class="workflow-stage" role="tabpanel" aria-labelledby="workflow-tab-dashboard" aria-live="polite"></div>
+      <noscript><p class="noscript-note">Enable JavaScript to switch between the four static workflow illustrations. No network requests are made.</p></noscript>
+    </section>
+
+    <section id="assurance" class="boundary-section anchored-section" aria-labelledby="boundary-title">
+      <div class="section-shell boundary-layout">
+        <div>
+          <p class="eyebrow">Boundary / 04</p>
+          <h2 id="boundary-title">A portfolio, not a <em>public service.</em></h2>
+          <p class="boundary-lede">This deployment is intentionally less capable than the development application. That difference is a security feature, not a hidden limitation.</p>
+        </div>
+        <div class="boundary-list">
+          <article><span aria-hidden="true">—</span><div><h3>No backend requests</h3><p>The shipped JavaScript does not call fetch, XHR, WebSocket, beacon, authentication, API, or audit endpoints.</p></div></article>
+          <article><span aria-hidden="true">—</span><div><h3>No simulated access</h3><p>There is no sign-in control, credential field, case form, upload, export, or claim that a protected operation succeeded.</p></div></article>
+          <article><span aria-hidden="true">—</span><div><h3>No production claim</h3><p>The underlying project remains a pre-production prototype without independent assurance or approval for real personal data.</p></div></article>
+          <article><span aria-hidden="true">—</span><div><h3>Express remains separate</h3><p>The normal Node.js host and its authentication, CSRF, authorization, policy, and A2SPA-R behavior are not included or modified.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="source-cta" aria-labelledby="source-title">
+      <p class="eyebrow">Inspect the prototype</p>
+      <h2 id="source-title">The evidence is in the repository.</h2>
+      <p>Review the architecture, tests, threat boundaries, policy model, residual risks, and implementation history rather than relying on portfolio claims.</p>
+      <a class="button signal" href="https://github.com/deaduramilade/BeyondBeams" rel="noopener noreferrer" target="_blank">Open GitHub repository <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">
+      <img src="/assets/favicon.svg" alt="" width="42" height="42">
+      <div><img src="/assets/logo.png" alt="BeyondBeams" width="220" height="34"><p>Accountable automation for governed institutions.</p></div>
+    </div>
+    <div><p class="footer-label">Artifact</p><p>Frontend-only<br>Read-only<br>Portfolio demonstration</p></div>
+    <div><p class="footer-label">Project status</p><p>Development only<br>NOT_READY<br>No real personal data</p></div>
+    <div class="footer-end"><p>A2SPA-R / 01</p><p>© 2026 BeyondBeams project owners</p></div>
+  </footer>
+
+  <script src="/assets/portfolio.js" defer></script>
+</body>
+</html>
