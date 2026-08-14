@@ -13,7 +13,7 @@ This file governs automated assistants working in this repository. Active human 
 
 - Domain actions are intended to pass an A2SPA signature check.
 - Credentials and private keys are runtime inputs and must never enter Git.
-- `Oblivion_1_0_0_2/` is an exported solution artifact; avoid mechanical rewrites.
+- `BeyondBeams_1_0_0_2/` is an exported solution artifact; avoid mechanical rewrites.
 - Lockfiles remain synchronized with manifests.
 - Changes reach `main` only through reviewed pull requests.
 
