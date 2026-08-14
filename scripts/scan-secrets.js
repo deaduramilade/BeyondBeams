@@ -8,7 +8,9 @@ const patterns = [
   /gh[pousr]_[A-Za-z0-9_]{20,}/,
   /AIza[0-9A-Za-z_-]{35}/
 ];
-const files = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8' }).split('\0').filter(Boolean);
+const files = execFileSync('git', ['ls-files', '-z', '--cached', '--others', '--exclude-standard'], { encoding: 'utf8' })
+  .split('\0')
+  .filter(file => file && fs.existsSync(file));
 const findings = [];
 for (const file of files) {
   const buffer = fs.readFileSync(file);
@@ -19,4 +21,4 @@ for (const file of files) {
 if (findings.length) {
   process.stderr.write(`Potential credential material found at:\n${findings.join('\n')}\n`);
   process.exitCode = 1;
-} else process.stdout.write(`Scanned ${files.length} tracked files; no configured credential patterns found.\n`);
+} else process.stdout.write(`Scanned ${files.length} repository files; no configured credential patterns found.\n`);
