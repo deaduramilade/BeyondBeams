@@ -1,6 +1,6 @@
 'use strict';
-const CACHE = 'oblivion-shell-v6';
-const SHELL = ['/', '/sign-in', '/agents', '/dashboard', '/cases/new', '/review', '/admin/audit', '/style.css', '/app.js', '/manifest.webmanifest'];
+const CACHE = 'beyondbeams-shell-v10';
+const SHELL = ['/', '/sign-in', '/agents', '/dashboard', '/cases/new', '/review', '/admin/audit', '/legal/privacy', '/legal/cookies', '/legal/terms', '/style.css', '/app.js', '/manifest.webmanifest', '/favicon.svg', '/logo.svg', '/beyondbeams-banner.svg'];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL))));
 self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key))))));
 self.addEventListener('fetch', event => {
