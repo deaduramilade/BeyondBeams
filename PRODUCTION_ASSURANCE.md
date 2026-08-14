@@ -6,7 +6,7 @@
 
 ## Purpose and boundary
 
-This document defines the evidence and approvals required before a deployment of Oblivion-AI may process real data or support consequential operational decisions. It is a governance and assurance checklist, not an assessment, certification, legal opinion, service-level agreement, or risk acceptance.
+This document defines the evidence and approvals required before a deployment of BeyondBeams may process real data or support consequential operational decisions. It is a governance and assurance checklist, not an assessment, certification, legal opinion, service-level agreement, or risk acceptance.
 
 The repository currently contains a pre-production prototype. Its `/execute` endpoint and simulated agents are development demonstrations and must not be treated as jurisdictional authorization, a legal determination, or production identity. Pilot remedy workflows, if implemented, must use synthetic records until an institution approves the applicable processing.
 
