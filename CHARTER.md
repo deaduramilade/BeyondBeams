@@ -1,8 +1,8 @@
-# Oblivion-AI Global Public-Sector Charter
+# BeyondBeams Global Public-Sector Charter
 
 ## Mission
 
-Oblivion-AI exists to help public institutions authorize consequential AI-assisted actions before execution and produce independently verifiable evidence afterward. It is designed for jurisdictional adaptation, sovereign operation, democratic accountability, and meaningful human remedy. It is not a decision maker, regulator, legal authority, or substitute for accountable officials.
+BeyondBeams exists to help public institutions authorize consequential AI-assisted actions before execution and produce independently verifiable evidence afterward. It is designed for jurisdictional adaptation, sovereign operation, democratic accountability, and meaningful human remedy. It is not a decision maker, regulator, legal authority, or substitute for accountable officials.
 
 ## Product direction
 
