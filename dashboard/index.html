@@ -3,24 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#171915">
-  <meta name="description" content="Governed AI case management with accountable human review">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="description" content="BeyondBeams governed AI case management with accountable human review">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="/manifest.webmanifest">
   <link rel="stylesheet" href="/style.css">
-  <title>Oblivion-AI</title>
+  <title>BeyondBeams</title>
 </head>
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
-  <div class="environment-bar"><span>Development environment</span><span>NOT_READY · No real personal data</span></div>
+  <div class="environment-bar"><span>Development environment</span><span>NOT_READY &middot; No real personal data</span></div>
   <header class="site-header">
-    <a class="brand" href="/" aria-label="Oblivion-AI home"><span class="brand-mark" aria-hidden="true">O<span>AI</span></span><span>Oblivion—AI</span></a>
+    <a class="brand" href="/" aria-label="BeyondBeams home"><img class="brand-mark" src="/favicon.svg" alt=""><img class="brand-wordmark" src="/logo.svg" alt="BeyondBeams"></a>
     <button id="nav-toggle" class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
     <nav id="site-nav" class="site-nav" aria-label="Primary navigation"><a href="/agents">Agents</a><a href="/dashboard" data-protected>Dashboard</a><a href="/cases/new" data-protected>New case</a><a href="/review" data-protected>Review</a><a href="/admin/audit" data-protected>Audit</a></nav>
     <div class="account-actions"><a id="sign-in-link" class="text-link" href="/sign-in">Sign in</a><button id="sign-out" class="text-button" type="button" hidden>Sign out</button></div>
   </header>
   <p id="connection-status" class="sr-only" role="status" aria-live="polite"></p>
   <main id="main-content" tabindex="-1"></main>
-  <footer class="site-footer"><div><a class="brand footer-brand" href="/">Oblivion—AI</a><p>Accountable automation for governed institutions.</p></div><div><p class="footer-label">Service boundary</p><p>This prototype does not replace published human review, appeal, remedy, complaint, accessibility, or non-digital service channels.</p></div><p class="footer-index">A2SPA—R / 01</p></footer>
+  <footer class="site-footer">
+    <div class="footer-intro"><a class="brand footer-brand" href="/" aria-label="BeyondBeams home"><img class="brand-mark footer-mark" src="/favicon.svg" alt=""><img class="brand-wordmark footer-wordmark" src="/logo.svg" alt="BeyondBeams"></a><p>Accountable automation for governed institutions.</p><p class="footer-index">A2SPA-R / 01</p></div>
+    <nav class="footer-nav" aria-label="Footer navigation"><div><p class="footer-label">Explore</p><a href="/">Home</a><a href="/agents">Agents</a><a href="/sign-in">Institutional access</a></div><div><p class="footer-label">Workspace</p><a href="/dashboard">Dashboard</a><a href="/cases/new">New case</a><a href="/review">Review queue</a></div><div><p class="footer-label">Legal</p><a href="/legal/privacy">Privacy notice</a><a href="/legal/cookies">Cookie notice</a><a href="/legal/terms">Terms &amp; conditions</a></div></nav>
+    <div class="footer-boundary"><p class="footer-label">Service boundary</p><p>This prototype does not replace published human review, appeal, remedy, complaint, accessibility, or non-digital service channels.</p><p>Copyright &copy; 2026 BeyondBeams project owners. All rights reserved.</p></div>
+  </footer>
   <script src="/app.js" defer></script>
 </body>
 </html>

@@ -5,7 +5,7 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
-const oblivionAI = require('./src/OblivionAI');
+const beyondBeams = require('./src/BeyondBeams');
 const { ACTIONS, hasActionScope, validateExecuteRequest } = require('./src/actions');
 const { digest } = require('./src/a2spa-r/canonical');
 const { verifyEnvelope } = require('./src/a2spa-r/envelope');
@@ -27,11 +27,11 @@ const DEFAULT_RATE_WINDOW_MS = 60000;
 function createApp(options = {}) {
   const env = options.env || process.env;
   const config = options.config || loadConfig(env);
-  config.sessionCookieName = validCookieName(config.sessionCookieName || 'oblivion_session');
+  config.sessionCookieName = validCookieName(config.sessionCookieName || 'beyondbeams_session');
   config.sessionCookieSecure = config.sessionCookieSecure === true;
   config.appOrigin = config.appOrigin || null;
   const logger = options.logger || createLogger();
-  const execute = options.execute || ((actionType, payload) => oblivionAI.execute(actionType, payload));
+  const execute = options.execute || ((actionType, payload) => beyondBeams.execute(actionType, payload));
   const replayStore = options.replayStore || new FileReplayStore({ directory: config.replayDirectory });
   const auditLedger = options.auditLedger || new AuditLedger({ directory: config.auditDirectory });
   const signer = options.signer || createDevelopmentSigner({ keyId: config.receiptKeyId, privateKey: normalizePem(env.RECEIPT_PRIVATE_KEY) });
@@ -81,8 +81,8 @@ function createApp(options = {}) {
     } catch (error) { return sendError(res, 401, safeCode(error.code), 'sign-in callback was rejected'); }
   });
   app.get('/metrics', authenticateMetrics(config.metricsToken), (req, res) => {
-    metrics.set('oblivion_dependency_ready', { dependency: 'policy' }, policyRegistry.status().ready ? 1 : 0);
-    metrics.set('oblivion_dependency_ready', { dependency: 'audit' }, auditLedger.verify().valid ? 1 : 0);
+    metrics.set('beyondbeams_dependency_ready', { dependency: 'policy' }, policyRegistry.status().ready ? 1 : 0);
+    metrics.set('beyondbeams_dependency_ready', { dependency: 'audit' }, auditLedger.verify().valid ? 1 : 0);
     res.type('text/plain').send(metrics.render());
   });
   app.get('/ready', async (req, res) => {
@@ -90,13 +90,13 @@ function createApp(options = {}) {
     const signerReady = await signer.readiness();
     const policyReady = policyRegistry.status().ready;
     const ready = audit.valid && policyReady && signerReady;
-    metrics.set('oblivion_dependency_ready', { dependency: 'policy' }, policyReady ? 1 : 0);
-    metrics.set('oblivion_dependency_ready', { dependency: 'audit' }, audit.valid ? 1 : 0);
-    metrics.set('oblivion_dependency_ready', { dependency: 'receipt_signer' }, signerReady ? 1 : 0);
+    metrics.set('beyondbeams_dependency_ready', { dependency: 'policy' }, policyReady ? 1 : 0);
+    metrics.set('beyondbeams_dependency_ready', { dependency: 'audit' }, audit.valid ? 1 : 0);
+    metrics.set('beyondbeams_dependency_ready', { dependency: 'receipt_signer' }, signerReady ? 1 : 0);
     res.status(ready ? 200 : 503).json({ status: ready ? 'ready' : 'not_ready' });
   });
   const browserShell = path.join(__dirname, 'dashboard', 'index.html');
-  for (const route of ['/', '/sign-in', '/agents', '/dashboard', '/cases/new', '/review', '/admin/audit']) {
+  for (const route of ['/', '/sign-in', '/agents', '/dashboard', '/cases/new', '/review', '/admin/audit', '/legal/privacy', '/legal/cookies', '/legal/terms']) {
     app.get(route, (req, res) => res.sendFile(browserShell));
   }
   app.get('/agents/:agentId', (req, res) => res.sendFile(browserShell));
@@ -130,7 +130,7 @@ function createApp(options = {}) {
   });
 
   app.post('/execute', authenticate, requireCsrf, rateLimit, async (req, res) => {
-    metrics.increment('oblivion_requests_total', { route: 'execute', status: 'received' });
+    metrics.increment('beyondbeams_requests_total', { route: 'execute', status: 'received' });
     const requestId = validRequestId(req.headers['x-request-id']) || crypto.randomUUID();
     const validation = validateExecuteRequest(req.body);
     if (!validation.valid) return sendError(res, 400, 'INVALID_REQUEST', validation.message, requestId);
@@ -167,7 +167,7 @@ function createApp(options = {}) {
       policyId: authorization.envelope.policy.id, policyVersion: authorization.envelope.policy.version,
       policyDigest: authorization.envelope.policy.digest
     });
-    metrics.increment('oblivion_policy_decisions_total', { decision: policyDecision.value, reason: policyDecision.reason });
+    metrics.increment('beyondbeams_policy_decisions_total', { decision: policyDecision.value, reason: policyDecision.reason });
     if (policyDecision.value !== 'permit') return sendError(res, 403, 'POLICY_DENIED', policyDecision.reason, requestId);
     if (!await signer.readiness()) return sendError(res, 503, 'KEY_SERVICE_UNAVAILABLE', 'receipt signing service is unavailable', requestId);
 
@@ -203,11 +203,11 @@ function createApp(options = {}) {
       recordAudit(auditLedger, 'receipt_issued', receiptAuditData(req.principal, receipt));
       if (executionError) {
         logger.error({ event: 'action_failed', requestId, actionType: req.body.actionType, code: safeCode(executionError.code), receiptId: receipt.receiptId });
-        metrics.increment('oblivion_requests_total', { route: 'execute', status: '500' });
+        metrics.increment('beyondbeams_requests_total', { route: 'execute', status: '500' });
         return res.status(500).json({ success: false, requestId, error: { code: 'EXECUTION_FAILED', message: 'action execution failed' }, receipt });
       }
       logger.info({ event: 'action_completed', requestId, actionType: req.body.actionType, receiptId: receipt.receiptId });
-      metrics.increment('oblivion_requests_total', { route: 'execute', status: '200' });
+      metrics.increment('beyondbeams_requests_total', { route: 'execute', status: '200' });
       return res.json({ success: true, requestId, result, receipt });
     } catch (evidenceError) {
       logger.error({ event: 'receipt_failed', requestId, code: safeCode(evidenceError.code), executionStatus: executionError ? 'failed' : 'succeeded' });
@@ -335,12 +335,12 @@ function loadConfig(env) {
     metricsToken: env.METRICS_TOKEN || null,
     oidcLoginUrl: env.OIDC_LOGIN_URL ? requiredUrl(env.OIDC_LOGIN_URL, 'OIDC_LOGIN_URL') : null,
     appOrigin: env.APP_ORIGIN ? parseOrigin(env.APP_ORIGIN, 'APP_ORIGIN') : null,
-    sessionCookieName: validCookieName(env.SESSION_COOKIE_NAME || 'oblivion_session'),
+    sessionCookieName: validCookieName(env.SESSION_COOKIE_NAME || 'beyondbeams_session'),
     sessionCookieSecure: env.APP_ORIGIN ? new URL(env.APP_ORIGIN).protocol === 'https:' : false
   };
 }
 
-function createAuthenticator(verify, auditLedger, sessionCookieName = 'oblivion_session', identityProvider = null) {
+function createAuthenticator(verify, auditLedger, sessionCookieName = 'beyondbeams_session', identityProvider = null) {
   return async (req, res, next) => {
     const header = req.get('authorization') || '';
     const bearer = header.startsWith('Bearer ') ? header.slice(7) : null;

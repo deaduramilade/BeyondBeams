@@ -12,7 +12,7 @@ The executor needs real policy decisions and testable persistence/operations con
 
 ## Decision
 
-Use signed immutable `oblivion.policy-pack/1` artifacts with distinct publication approvals, default-deny evaluation, institution/jurisdiction/purpose binding, deny precedence, human approval, rights/remedy metadata, revocation, rollback, and decision audit. Keep local file replay/audit/queue and in-process metrics as development reference adapters. Production must replace them with approved regional durable services without weakening A2SPA-R receipt semantics or fail-closed admission.
+Use signed immutable `beyondbeams.policy-pack/1` artifacts with distinct publication approvals, default-deny evaluation, institution/jurisdiction/purpose binding, deny precedence, human approval, rights/remedy metadata, revocation, rollback, and decision audit. Keep local file replay/audit/queue and in-process metrics as development reference adapters. Production must replace them with approved regional durable services without weakening A2SPA-R receipt semantics or fail-closed admission.
 
 ## Alternatives considered
 

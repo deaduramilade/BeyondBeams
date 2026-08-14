@@ -2,13 +2,13 @@
 
 ## Overview
 
-Oblivion-AI is a single-process Node.js authorization/execution prototype with a browser/PWA client and Copilot Studio export. It is not a production reference architecture.
+BeyondBeams is a single-process Node.js authorization/execution prototype with a browser/PWA client and Copilot Studio export. It is not a production reference architecture.
 
 | Component | Responsibility | Trust |
 |---|---|---|
 | Dashboard/PWA | Localized accessible development input, connectivity/manual-service boundary, and receipt display | Untrusted client |
 | Express API | OIDC identity, A2SPA-R verification, policy decision, validation, receipt, audit, and HTTP translation | Security boundary |
-| `OblivionAI` | Prefix-based dispatch | Internal router |
+| `BeyondBeams` | Prefix-based dispatch | Internal router |
 | Policy registry | Verify and evaluate signed institution/jurisdiction packs | Security boundary |
 | Replay/audit/case stores | Atomically consume nonces, preserve hash-chained events, and retain tenant-scoped case timelines | Local development persistence |
 | Managed signer adapter | Sign receipts without exposing provider implementation | Highest sensitivity |

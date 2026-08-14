@@ -41,7 +41,7 @@ jobs:
           npm sbom --sbom-format cyclonedx > release-evidence/sbom.cdx.json
           npm pack --pack-destination artifacts
           sha256sum artifacts/* release-evidence/sbom.cdx.json release-evidence/npm-audit.json > release-evidence/SHA256SUMS
-          node -e "const fs=require('fs');fs.writeFileSync('release-evidence/build-metadata.json',JSON.stringify({schema:'oblivion.release-evidence/1',repository:process.env.GITHUB_REPOSITORY,commit:process.env.GITHUB_SHA,ref:process.env.GITHUB_REF,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,actor:process.env.GITHUB_ACTOR,node:process.version,createdAt:new Date().toISOString()},null,2)+'\n')"
+          node -e "const fs=require('fs');fs.writeFileSync('release-evidence/build-metadata.json',JSON.stringify({schema:'ephemeralbeam.release-evidence/1',repository:process.env.GITHUB_REPOSITORY,commit:process.env.GITHUB_SHA,ref:process.env.GITHUB_REF,runId:process.env.GITHUB_RUN_ID,runAttempt:process.env.GITHUB_RUN_ATTEMPT,actor:process.env.GITHUB_ACTOR,node:process.version,createdAt:new Date().toISOString()},null,2)+'\n')"
       - name: Verify Release Tag
         env:
           RELEASE_TAG: ${{ inputs.tag }}

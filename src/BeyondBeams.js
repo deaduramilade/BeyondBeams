@@ -14,7 +14,7 @@ const ROUTES = Object.freeze({
   'rights.management.exercise': payload => RightsManagementAgent.exerciseRight(payload)
 });
 
-class OblivionAI {
+class BeyondBeams {
   async execute(actionType, payload) {
     const route = ROUTES[actionType];
     if (!route) {
@@ -26,4 +26,4 @@ class OblivionAI {
   }
 }
 
-module.exports = new OblivionAI();
+module.exports = new BeyondBeams();

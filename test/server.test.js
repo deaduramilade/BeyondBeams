@@ -41,7 +41,7 @@ function issueAuthorization(body = requestBody, overrides = {}) {
 }
 
 function createFixture(t, overrides = {}) {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'oblivion-server-'));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'beyondbeams-server-'));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const auditLedger = new AuditLedger({ directory: path.join(root, 'audit') });
   const replayStore = new FileReplayStore({ directory: path.join(root, 'replay') });
@@ -78,7 +78,7 @@ test('serves public assets and reports dependency-aware readiness', async t => {
     assert.equal((await fetch(`${base}/metrics`)).status, 404);
     const metrics = await fetch(`${base}/metrics`, { headers: { 'x-metrics-token': 'synthetic-metrics-token' } });
     assert.equal(metrics.status, 200);
-    assert.match(await metrics.text(), /oblivion_dependency_ready/);
+    assert.match(await metrics.text(), /beyondbeams_dependency_ready/);
   });
 });
 
@@ -162,13 +162,13 @@ test('creates cases through policy-bound server authorization and supports same-
   fixture.identityProvider.sessions.set('session-token', { principal: { ...principal, type: 'service' }, expiresAt: Date.now() + 60000, generation: 1 });
   await withServer(fixture, async base => {
     const csrfToken = fixture.identityProvider.issueCsrfToken('session-token');
-    const sessionHeaders = { 'content-type': 'application/json', cookie: 'oblivion_session=session-token', origin: base, 'x-csrf-token': csrfToken };
+    const sessionHeaders = { 'content-type': 'application/json', cookie: 'beyondbeams_session=session-token', origin: base, 'x-csrf-token': csrfToken };
     const guided = await fetch(`${base}/api/cases`, { method: 'POST', headers: sessionHeaders, body: JSON.stringify({ inputMethod: 'guided', actionType: requestBody.actionType, payload: requestBody.payload, purpose: 'synthetic-test' }) });
     assert.equal(guided.status, 201);
     const created = await guided.json();
     assert.equal(created.authorization.issued, true);
     assert.equal(created.case.state, 'submitted');
-    const listed = await fetch(`${base}/api/cases`, { headers: { cookie: 'oblivion_session=session-token' } });
+    const listed = await fetch(`${base}/api/cases`, { headers: { cookie: 'beyondbeams_session=session-token' } });
     assert.equal((await listed.json()).cases.length, 1);
     const invalidJson = await fetch(`${base}/api/cases`, { method: 'POST', headers: sessionHeaders, body: JSON.stringify({ inputMethod: 'json', actionType: requestBody.actionType, payload: { ...requestBody.payload, unknown: true } }) });
     assert.equal(invalidJson.status, 400);
@@ -231,7 +231,7 @@ test('browser authentication routes fail closed without a session provider', asy
 test('serves the browser shell for all user-facing page routes', async t => {
   const fixture = createFixture(t);
   await withServer(fixture, async base => {
-    for (const route of ['/', '/sign-in', '/agents', '/agents/real-time-defense', '/agents/rights-management', '/dashboard', '/cases/new', '/cases/case_synthetic', '/review', '/admin/audit']) {
+    for (const route of ['/', '/sign-in', '/agents', '/agents/real-time-defense', '/agents/rights-management', '/dashboard', '/cases/new', '/cases/case_synthetic', '/review', '/admin/audit', '/legal/privacy', '/legal/cookies', '/legal/terms']) {
       const response = await fetch(`${base}${route}`);
       assert.equal(response.status, 200);
       assert.match(await response.text(), /<main id="main-content"/);

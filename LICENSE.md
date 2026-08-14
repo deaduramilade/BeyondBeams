@@ -1,6 +1,6 @@
 # License Status
 
-Copyright (c) 2026 Oblivion-AI project owners. All rights reserved.
+Copyright (c) 2026 BeyondBeams project owners. All rights reserved.
 
 No license is granted to use, copy, modify, merge, publish, distribute, sublicense, sell, deploy, or create derivative works from this repository except with prior written permission from the copyright holders or as otherwise required by applicable law.
 

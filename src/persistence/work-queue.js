@@ -88,10 +88,10 @@ class FileWorkQueue {
 function readState(file) {
   try {
     const state = JSON.parse(fs.readFileSync(file, 'utf8'));
-    if (!state || state.schema !== 'oblivion.queue/1' || !Array.isArray(state.items)) throw new Error();
+    if (!state || state.schema !== 'beyondbeams.queue/1' || !Array.isArray(state.items)) throw new Error();
     return state;
   } catch (error) {
-    if (error.code === 'ENOENT') return { schema: 'oblivion.queue/1', items: [] };
+    if (error.code === 'ENOENT') return { schema: 'beyondbeams.queue/1', items: [] };
     throw error;
   }
 }

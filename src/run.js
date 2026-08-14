@@ -1,8 +1,8 @@
 // src/run.js
-// Oblivion-AI Command-Line Interface
+// BeyondBeams Command-Line Interface
 // Usage: node run.js "actionType" "JSON payload"
 
-const oblivionAI = require('./OblivionAI');
+const beyondBeams = require('./BeyondBeams');
 
 const args = process.argv.slice(2);
 const actionType = args[0];
@@ -18,7 +18,7 @@ if (args[1]) {
 }
 
 if (!actionType) {
-  console.log("\n🚀 Oblivion-AI CLI");
+  console.log("\n🚀 BeyondBeams CLI");
   console.log("Usage: node run.js <actionType> <JSON-payload>\n");
   console.log("Examples:");
   console.log('  node run.js "realtime.defense.breach.detect" \'{"breachId":"TEST-001","affectedRecords":500}\'');
@@ -27,9 +27,9 @@ if (!actionType) {
   process.exit(0);
 }
 
-console.log(`\n🔥 Executing Oblivion-AI action: ${actionType}\n`);
+console.log(`\n🔥 Executing BeyondBeams action: ${actionType}\n`);
 
-oblivionAI.execute(actionType, payload)
+beyondBeams.execute(actionType, payload)
   .then(result => {
     console.log("\n✅ SUCCESS:");
     console.dir(result, { depth: null });

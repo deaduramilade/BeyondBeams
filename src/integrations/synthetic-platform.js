@@ -6,7 +6,7 @@ const { digest } = require('../a2spa-r/canonical');
 const { validateProviderContracts } = require('./contracts');
 
 class SyntheticIdentityProvider {
-  constructor({ issuer = 'https://identity.synthetic.invalid', clientId = 'oblivion-synthetic', redirectUri = 'https://app.synthetic.invalid/auth/callback', now = Date.now, sessionTtlMs = 900000 } = {}) {
+  constructor({ issuer = 'https://identity.synthetic.invalid', clientId = 'beyondbeams-synthetic', redirectUri = 'https://app.synthetic.invalid/auth/callback', now = Date.now, sessionTtlMs = 900000 } = {}) {
     this.issuer = issuer; this.clientId = clientId; this.redirectUri = redirectUri; this.now = now; this.sessionTtlMs = sessionTtlMs;
     this.transactions = new Map(); this.sessions = new Map(); this.revoked = new Set();
   }
@@ -91,7 +91,7 @@ class SyntheticNotificationProvider {
 }
 
 class SyntheticDocumentProvider {
-  generate({ title, language, sections }) { if (!title || !language || !Array.isArray(sections)) throw providerError('INVALID_DOCUMENT'); const document = { schema: 'oblivion.synthetic-document/1', title, language, sections: clone(sections) }; return { document, digest: digest(document, 'synthetic-document') }; }
+  generate({ title, language, sections }) { if (!title || !language || !Array.isArray(sections)) throw providerError('INVALID_DOCUMENT'); const document = { schema: 'beyondbeams.synthetic-document/1', title, language, sections: clone(sections) }; return { document, digest: digest(document, 'synthetic-document') }; }
   validateAccessibility({ document }) { const findings = []; if (!document.language) findings.push('LANGUAGE_REQUIRED'); if (!document.title) findings.push('TITLE_REQUIRED'); if (!document.sections.length || document.sections.some(section => !section.heading || !section.body)) findings.push('STRUCTURE_REQUIRED'); return { valid: findings.length === 0, findings, scope: 'structural-synthetic-check-only' }; }
 }
 

@@ -10,8 +10,8 @@
 ## Setup
 
 ```bash
-git clone https://github.com/deaduramilade/oblivionsec.git
-cd oblivionsec
+git clone https://github.com/deaduramilade/beyondbeams.git
+cd beyondbeams
 npm ci
 ```
 

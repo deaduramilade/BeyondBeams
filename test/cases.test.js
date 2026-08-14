@@ -8,7 +8,7 @@ const test = require('node:test');
 const { CaseStore } = require('../src/cases/store');
 
 test('persists tenant-isolated cases and complete status history', t => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'oblivion-cases-')); t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'beyondbeams-cases-')); t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   const store = new CaseStore({ directory, now: () => Date.parse('2026-08-12T00:00:00.000Z') });
   const record = store.create({ tenantId: 'tenant-a', actorId: 'requester-a', actionType: 'regulatory.oversight.perform', payload: { controller: 'Synthetic Authority' }, inputMethod: 'json' });
   store.transition({ tenantId: 'tenant-a', caseId: record.caseId, actorId: 'requester-a', actorRoles: ['requester'], target: 'submitted' });
@@ -18,7 +18,7 @@ test('persists tenant-isolated cases and complete status history', t => {
 });
 
 test('enforces transition order, separation of duties, and assignment conflicts', t => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'oblivion-cases-')); t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'beyondbeams-cases-')); t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   const store = new CaseStore({ directory }); const record = store.create({ tenantId: 'tenant-a', actorId: 'requester-a', actionType: 'regulatory.oversight.perform', payload: { controller: 'Synthetic Authority' } });
   assert.throws(() => store.transition({ tenantId: 'tenant-a', caseId: record.caseId, actorId: 'requester-a', actorRoles: ['requester'], target: 'approved' }), { code: 'INVALID_CASE_TRANSITION' });
   store.transition({ tenantId: 'tenant-a', caseId: record.caseId, actorId: 'requester-a', actorRoles: ['requester'], target: 'submitted' });
@@ -27,7 +27,7 @@ test('enforces transition order, separation of duties, and assignment conflicts'
 });
 
 test('supports queues, assignments, deadlines, notes, evidence, suspension, and resume', t => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'oblivion-cases-')); t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'beyondbeams-cases-')); t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   let now = Date.parse('2026-08-12T00:00:00.000Z'); const store = new CaseStore({ directory, now: () => now });
   const item = store.create({ tenantId: 'tenant-a', actorId: 'requester-a', actionType: 'regulatory.oversight.perform', payload: { controller: 'Synthetic Authority' } });
   store.transition({ tenantId: 'tenant-a', caseId: item.caseId, actorId: 'requester-a', actorRoles: ['requester'], target: 'submitted' });
@@ -46,7 +46,7 @@ test('supports queues, assignments, deadlines, notes, evidence, suspension, and 
 });
 
 test('requires reasoned decision and override records', t => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'oblivion-cases-')); t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'beyondbeams-cases-')); t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   const store = new CaseStore({ directory }); const item = store.create({ tenantId: 'tenant-a', actorId: 'requester-a', actionType: 'regulatory.oversight.perform', payload: { controller: 'Synthetic Authority' } });
   store.transition({ tenantId: 'tenant-a', caseId: item.caseId, actorId: 'requester-a', actorRoles: ['requester'], target: 'submitted' });
   store.transition({ tenantId: 'tenant-a', caseId: item.caseId, actorId: 'reviewer-a', actorRoles: ['reviewer'], target: 'triage' });

@@ -2,7 +2,7 @@
 
 const assert = require('node:assert/strict');
 const test = require('node:test');
-const oblivionAI = require('../src/OblivionAI');
+const beyondBeams = require('../src/BeyondBeams');
 
 const actions = [
   ['realtime.defense.breach.detect', { breachId: 'SYNTHETIC-1', affectedRecords: 1, dataFlow: 'test' }],
@@ -14,13 +14,13 @@ const actions = [
 
 test('routes every exact pre-authorized action to its agent', async () => {
   for (const [actionType, payload] of actions) {
-    const result = await oblivionAI.execute(actionType, payload);
+    const result = await beyondBeams.execute(actionType, payload);
     assert.equal(result.actionType, actionType);
     assert.equal(result.a2spaVerified, undefined);
   }
 });
 
 test('rejects action prefixes and unknown suffixes', async () => {
-  await assert.rejects(() => oblivionAI.execute('realtime.defense', {}), { code: 'UNKNOWN_ACTION' });
-  await assert.rejects(() => oblivionAI.execute('realtime.defense.breach.detect.extra', {}), { code: 'UNKNOWN_ACTION' });
+  await assert.rejects(() => beyondBeams.execute('realtime.defense', {}), { code: 'UNKNOWN_ACTION' });
+  await assert.rejects(() => beyondBeams.execute('realtime.defense.breach.detect.extra', {}), { code: 'UNKNOWN_ACTION' });
 });

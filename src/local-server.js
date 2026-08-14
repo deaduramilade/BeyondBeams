@@ -51,7 +51,7 @@ function createLocalApp(options = {}) {
     authorizationAudience: 'executor.local',
     authorizationKeys: new KeyStore([{ issuer: 'issuer.local', keyId: 'authorization-key-local', algorithm: 'ES256', publicKey: authorizationKeys.publicKey }]),
     authorizationIssuers: ['issuer.local'],
-    deploymentDigest: crypto.createHash('sha256').update('oblivion-local-development').digest('hex'),
+    deploymentDigest: crypto.createHash('sha256').update('beyondbeams-local-development').digest('hex'),
     receiptKeyId: 'receipt-key-local',
     replayDirectory: path.join(runtimeDirectory, 'replay'),
     auditDirectory: path.join(runtimeDirectory, 'audit'),
@@ -64,7 +64,7 @@ function createLocalApp(options = {}) {
     metricsToken: null,
     oidcLoginUrl: null,
     appOrigin: null,
-    sessionCookieName: 'oblivion_session',
+    sessionCookieName: 'beyondbeams_session',
     sessionCookieSecure: false
   };
   const identityVerifier = async () => {

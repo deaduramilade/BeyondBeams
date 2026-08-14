@@ -5,7 +5,7 @@ const { digest } = require('../a2spa-r/canonical');
 const { ALGORITHM, signObject, verifyObject } = require('../a2spa-r/crypto');
 const { exactObject, identifier, stringArray, timestamp } = require('../a2spa-r/validation');
 
-const SCHEMA = 'oblivion.policy-pack/1';
+const SCHEMA = 'beyondbeams.policy-pack/1';
 const PACK_FIELDS = ['schema', 'id', 'version', 'publisher', 'keyId', 'algorithm', 'institution', 'jurisdiction', 'publishedAt', 'effectiveAt', 'expiresAt', 'supersedes', 'approvals', 'rules', 'signature'];
 const RULE_FIELDS = ['id', 'effect', 'actions', 'purposes', 'principalTypes', 'humanApproval', 'rights'];
 const APPROVAL_FIELDS = ['role', 'approver', 'approvedAt'];

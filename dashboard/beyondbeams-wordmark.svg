@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 180" role="img" aria-labelledby="title desc">
+  <title id="title">BEYONDBEAMS</title>
+  <desc id="desc">BeyondBeams in a black geometric techno-stencil display treatment.</desc>
+  <defs>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Michroma&amp;display=swap');</style>
+    <mask id="stencil">
+      <rect width="1240" height="180" fill="white"/>
+      <g fill="black" transform="skewX(-18)">
+        <rect x="118" y="33" width="8" height="105"/><rect x="225" y="33" width="8" height="105"/>
+        <rect x="334" y="33" width="8" height="105"/><rect x="443" y="33" width="8" height="105"/>
+        <rect x="552" y="33" width="8" height="105"/><rect x="661" y="33" width="8" height="105"/>
+        <rect x="770" y="33" width="8" height="105"/><rect x="879" y="33" width="8" height="105"/>
+        <rect x="988" y="33" width="8" height="105"/><rect x="1097" y="33" width="8" height="105"/>
+      </g>
+    </mask>
+  </defs>
+  <g fill="#000000" mask="url(#stencil)">
+    <text x="38" y="122" font-family="Michroma, 'Eurostile Extended', 'Bank Gothic', sans-serif" font-size="83" font-weight="400" letter-spacing="8">BEYONDBEAMS</text>
+  </g>
+  <g fill="#000000">
+    <path d="M39 26H96v4H39zM1144 26h57v4h-57zM39 145h318v3H39zM374 145h472v3H374zM863 145h338v3H863z"/>
+    <path d="M39 20h7v16h-7zM1194 20h7v16h-7zM357 140h8v13h-8zM846 140h8v13h-8z"/>
+  </g>
+</svg>

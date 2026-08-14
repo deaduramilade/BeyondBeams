@@ -42,7 +42,7 @@ function verifyOptions(directory, now, overrides = {}) {
 }
 
 test('durably rejects duplicate authorization and allows nonce reuse across tenants', t => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'oblivion-replay-'));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'beyondbeams-replay-'));
   t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   const now = 1700000000000;
   const issued = envelope(now);
@@ -54,7 +54,7 @@ test('durably rejects duplicate authorization and allows nonce reuse across tena
 });
 
 test('rejects payload tampering, policy mismatch, unknown and revoked keys, and replay-store failure', t => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'oblivion-replay-'));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'beyondbeams-replay-'));
   t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   const now = 1700000000000;
   assert.equal(verifyEnvelope(envelope(now), verifyOptions(directory, now, { payloadDigest: digest({ changed: true }, 'action-payload') })).reason, 'PAYLOAD_MISMATCH');
@@ -66,7 +66,7 @@ test('rejects payload tampering, policy mismatch, unknown and revoked keys, and 
 });
 
 test('cleans expired replay entries before atomically consuming a nonce', t => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'oblivion-replay-'));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'beyondbeams-replay-'));
   t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   const store = new FileReplayStore({ directory, now: () => 2000 });
   store.consume('expired', 1000);
@@ -94,7 +94,7 @@ test('issues and verifies linked signed receipts and fails closed when signer is
 });
 
 test('detects audit-chain tampering, isolates exports, logs access, and records retention disposition', t => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'oblivion-audit-'));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'beyondbeams-audit-'));
   t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   const ledger = new AuditLedger({ directory, now: () => 1700000000000 });
   ledger.append('receipt_issued', { tenant: 'tenant-a', receiptId: 'receipt-a', retentionClass: 'test-short', legalHold: false });

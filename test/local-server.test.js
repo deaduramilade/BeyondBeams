@@ -9,7 +9,7 @@ const test = require('node:test');
 const { createLocalApp, resolveLocalHost, resolvePort } = require('../src/local-server');
 
 test('local server starts ready without external credentials and remains unauthenticated', async t => {
-  const runtimeDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'oblivion-local-'));
+  const runtimeDirectory = fs.mkdtempSync(path.join(os.tmpdir(), 'beyondbeams-local-'));
   t.after(() => fs.rmSync(runtimeDirectory, { recursive: true, force: true }));
   const app = createLocalApp({ runtimeDirectory, logger: { info() {}, error() {} } });
   const server = app.listen(0, '127.0.0.1');
