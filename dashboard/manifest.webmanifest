@@ -1,9 +1,10 @@
 {
-  "name": "Oblivion-AI Governed Case Workspace",
-  "short_name": "Oblivion-AI",
+  "name": "BeyondBeams Governed Case Workspace",
+  "short_name": "BeyondBeams",
   "description": "Public-sector AI authorization and accountability prototype",
   "start_url": "/dashboard",
   "display": "standalone",
   "background_color": "#eee9df",
-  "theme_color": "#171915"
+  "theme_color": "#0a0a0a",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
 }
