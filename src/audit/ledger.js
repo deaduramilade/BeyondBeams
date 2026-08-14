@@ -28,7 +28,7 @@ class AuditLedger {
       if (!verification.valid) throw ledgerError('AUDIT_INTEGRITY_FAILURE');
       const previousDigest = records.length ? records[records.length - 1].recordDigest : GENESIS;
       const unsigned = {
-        schema: 'oblivion.audit/1',
+        schema: 'beyondbeams.audit/1',
         sequence: records.length + 1,
         eventId: crypto.randomUUID(),
         timestamp: new Date(this.now()).toISOString(),
@@ -55,7 +55,7 @@ class AuditLedger {
     const verification = verifyRecords(records);
     if (!verification.valid) throw ledgerError('AUDIT_INTEGRITY_FAILURE');
     return {
-      schema: 'oblivion.audit-export/1',
+      schema: 'beyondbeams.audit-export/1',
       generatedAt: new Date(this.now()).toISOString(),
       tenantId,
       records: records.filter(record => record.data.tenant === tenantId),
