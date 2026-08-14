@@ -9,7 +9,7 @@ const { FileWorkQueue } = require('../src/persistence/work-queue');
 const { Metrics } = require('../src/operations/metrics');
 
 test('durably enqueues idempotent work, leases, retries, and dead-letters', t => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'oblivion-queue-'));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'beyondbeams-queue-'));
   t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   let now = 1000;
   const queue = new FileWorkQueue({ directory, now: () => now, maxAttempts: 2, leaseMs: 100 });
@@ -28,14 +28,14 @@ test('durably enqueues idempotent work, leases, retries, and dead-letters', t =>
 
 test('exports bounded metrics without sensitive labels', () => {
   const metrics = new Metrics();
-  metrics.increment('oblivion_requests_total', { route: 'execute', status: '200' });
-  metrics.set('oblivion_dependency_ready', { dependency: 'policy' }, 1);
-  assert.match(metrics.render(), /oblivion_requests_total/);
+  metrics.increment('beyondbeams_requests_total', { route: 'execute', status: '200' });
+  metrics.set('beyondbeams_dependency_ready', { dependency: 'policy' }, 1);
+  assert.match(metrics.render(), /beyondbeams_requests_total/);
   assert.throws(() => metrics.increment('bad-name', { actor: 'subject with spaces' }));
 });
 
 test('rejects malformed queue items before persistence', t => {
-  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'oblivion-queue-'));
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'beyondbeams-queue-'));
   t.after(() => fs.rmSync(directory, { recursive: true, force: true }));
   const queue = new FileWorkQueue({ directory });
   assert.throws(() => queue.enqueue({ tenant: '../tenant', type: 'work', idempotencyKey: 'key', payloadDigest: 'invalid', reference: 'ref' }));
