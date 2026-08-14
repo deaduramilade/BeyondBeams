@@ -62,9 +62,12 @@ test('brand uses the BeyondBeams logo and favicon in the header and footer', () 
   assert.doesNotMatch(html, /class="brand-(?:orbit|core|ai)"/);
 });
 
-test('landing page presents the full BeyondBeams wordmark in the first viewport', () => {
-  assert.match(script, /class="hero-wordmark" src="\/beyondbeams-wordmark\.svg"/);
-  assert.match(css, /\.hero-wordmark\{[^}]*width:min\(100%,620px\)/);
+test('landing page uses a mature governed-control narrative without a competing wordmark overlay', () => {
+  assert.match(script, /class="landing-hero"/);
+  assert.match(script, /Governance sequence/);
+  assert.match(script, /AI should not outrun institutional responsibility/);
+  assert.doesNotMatch(script, /class="hero-wordmark"/);
+  assert.doesNotMatch(css, /\.landing-hero[^}]*beyondbeams-banner\.svg/);
   assert.match(wordmark, /mask id="stencil"/);
   assert.match(wordmark, /BEYONDBEAMS/);
   assert.match(favicon, /segmented techno-stencil/);
